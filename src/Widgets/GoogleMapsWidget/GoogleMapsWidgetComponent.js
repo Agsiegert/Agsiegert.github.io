@@ -1,3 +1,4 @@
+import googleMapsApiKey from 'utils/googleMapsApiKey';
 import googleMapsImageUrl from 'utils/googleMapsImageUrl';
 
 const minHeight = 350;
@@ -79,6 +80,11 @@ class GoogleMapsWidgetComponent extends React.Component {
       zoom,
       ie: 'UTF8',
     };
+
+    const key = googleMapsApiKey();
+    if (key) {
+      params.key = key;
+    }
 
     return googleMapsImageUrl(params);
   }
