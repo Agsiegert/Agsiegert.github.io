@@ -29,27 +29,15 @@ class YoutubeVideoWidgetComponent extends React.Component {
   }
 
   render() {
-    const youtubeVideoId = this.props.widget.get('youtubeVideoId');
-
-    if (!youtubeVideoId) {
-      return (
-        <InPlaceEditingPlaceholder center={ true }>
-          Provide a YouTube video ID in the widget properties.
-        </InPlaceEditingPlaceholder>
-      );
-    }
-
     return (
       <div
         ref={ e => { this.outerDiv = e; } }
         className="text-center"
       >
-        <iframe
+        <PlaceholderOrYoutubeComponent
+          youtubeVideoId={ this.props.widget.get('youtubeVideoId') }
           width={ this.state.elementWidth }
           height={ this.state.elementWidth / this.aspectRatio() }
-          src={ `https://www.youtube.com/embed/${youtubeVideoId}` }
-          frameBorder="0"
-          gesture="media"
         />
       </div>
     );
@@ -66,6 +54,26 @@ class YoutubeVideoWidgetComponent extends React.Component {
       default: return 16 / 9;
     }
   }
+}
+
+function PlaceholderOrYoutubeComponent({ youtubeVideoId, width, height }) {
+  if (!youtubeVideoId) {
+    return (
+      <InPlaceEditingPlaceholder>
+        Provide a YouTube video ID in the widget properties.
+      </InPlaceEditingPlaceholder>
+    );
+  }
+
+  return (
+    <iframe
+      width={ width }
+      height={ height }
+      src={ `https://www.youtube.com/embed/${youtubeVideoId}` }
+      frameBorder="0"
+      gesture="media"
+    />
+  );
 }
 
 Scrivito.provideComponent('YoutubeVideoWidget', YoutubeVideoWidgetComponent);
