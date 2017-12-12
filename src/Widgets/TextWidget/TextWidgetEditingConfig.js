@@ -24,6 +24,5 @@ Scrivito.provideEditingConfig('TextWidget', {
   ],
   initialContent: {
     alignment: 'left',
-    text: '<p>Lorem ipsum dolor sit amet.</p>',
   },
 });
