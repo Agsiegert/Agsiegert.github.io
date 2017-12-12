@@ -1,4 +1,4 @@
-import IconWidgetComponent from 'Widgets/IconWidget/IconWidgetComponent';
+import IconComponent from 'Components/Icon';
 import AllIcons from './IconEditorTab/AllIcons';
 import IconSearch from './IconEditorTab/IconSearch';
 import IconSearchResults from './IconEditorTab/IconSearchResults';
@@ -41,7 +41,7 @@ class IconEditorTab extends React.Component {
           <div className="scrivito_detail_label">
             <span>Preview</span>
           </div>
-          <IconWidgetComponent widget={ widget } />
+          <IconComponent icon={ widget.get('icon') } />
           <IconSearch
             searchValue={ this.state.searchValue }
             setSearchValue={ this.setSearchValue }
