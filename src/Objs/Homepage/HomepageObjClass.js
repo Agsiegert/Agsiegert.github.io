@@ -11,7 +11,7 @@ const Homepage = Scrivito.provideObjClass('Homepage', {
     logoWhite: 'reference',
     dividerLogo: 'reference',
     facebookId: 'string',
-    twitterId: 'string',
+    twitterSite: 'string',
     googleMapsApiKey: 'string',
     ...socialCardsAttributes,
   },

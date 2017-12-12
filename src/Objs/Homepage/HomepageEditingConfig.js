@@ -27,8 +27,8 @@ Scrivito.provideEditingConfig('Homepage', {
       title: 'Facebook app ID',
       description: 'Register at https://developers.facebook.com/docs/apps/register',
     },
-    twitterId: {
-      title: 'Twitter site ID',
+    twitterSite: {
+      title: 'Twitter site',
       description: 'Needs to be approved at https://cards-dev.twitter.com/validator',
     },
     googleMapsApiKey: {
@@ -47,7 +47,7 @@ Scrivito.provideEditingConfig('Homepage', {
         'logoWhite',
         'dividerLogo',
         'facebookId',
-        'twitterId',
+        'twitterSite',
         'googleMapsApiKey',
       ],
     },

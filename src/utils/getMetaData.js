@@ -15,9 +15,9 @@ function getMetaData(page) {
     meta.push({ property: 'fb:app_id', content: facebookId });
   }
 
-  const twitterId = Scrivito.Obj.root().get('twitterId');
-  if (twitterId) {
-    meta.push({ name: 'twitter:site', content: twitterId });
+  const twitterSite = Scrivito.Obj.root().get('twitterSite');
+  if (twitterSite) {
+    meta.push({ name: 'twitter:site', content: twitterSite });
   }
 
   const tcCreator = page.get('tcCreator');
