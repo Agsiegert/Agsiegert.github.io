@@ -33,8 +33,7 @@ Scrivito.provideEditingConfig('Homepage', {
     },
     googleMapsApiKey: {
       title: 'Google Maps API key',
-      description: 'Needs to be requested at' +
-        ' https://developers.google.com/maps/documentation/static-maps/',
+      description: 'Needs to be requested at https://developers.google.com/maps/web/',
     },
   },
   properties: [
