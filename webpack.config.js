@@ -35,7 +35,7 @@ module.exports = (env = {}) => {
     new InlineEnvironmentVariablesPlugin('SCRIVITO_TENANT'),
     new CleanWebpackPlugin([buildPath], { verbose: false }),
     new CopyWebpackPlugin([
-      { from: '../static' },
+      { from: '../public' },
       { from: '../vendor/scrivito', to: 'scrivito' },
     ]),
     new ExtractTextPlugin({
