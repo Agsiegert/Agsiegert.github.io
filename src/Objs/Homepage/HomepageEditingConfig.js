@@ -31,6 +31,11 @@ Scrivito.provideEditingConfig('Homepage', {
       title: 'Twitter site ID',
       description: 'Needs to be approved at https://cards-dev.twitter.com/validator',
     },
+    googleMapsApiKey: {
+      title: 'Google Maps API key',
+      description: 'Needs to be requested at' +
+        ' https://developers.google.com/maps/documentation/static-maps/',
+    },
   },
   properties: [
     ...defaultGeneralProperties,
@@ -44,6 +49,7 @@ Scrivito.provideEditingConfig('Homepage', {
         'dividerLogo',
         'facebookId',
         'twitterId',
+        'googleMapsApiKey',
       ],
     },
     socialCardsCustomGroup,
