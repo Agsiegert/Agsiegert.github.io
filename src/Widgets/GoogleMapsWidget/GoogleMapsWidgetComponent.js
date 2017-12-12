@@ -1,7 +1,6 @@
 import googleMapsApiKey from 'utils/googleMapsApiKey';
 import googleMapsImageUrl from 'utils/googleMapsImageUrl';
 
-const minHeight = 350;
 const maxWidth = 640;
 
 class GoogleMapsWidgetComponent extends React.Component {
@@ -11,8 +10,8 @@ class GoogleMapsWidgetComponent extends React.Component {
     this.state = {
       elementHeight: 0,
       elementWidth: 0,
-      height: minHeight,
-      width: maxWidth,
+      height: null,
+      width: null,
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -71,6 +70,12 @@ class GoogleMapsWidgetComponent extends React.Component {
   googleMapsImageUrl() {
     const address = this.props.widget.get('address') || 'Brandenburg Gate, Berlin, Germany';
     const zoom = this.props.widget.get('zoom') || '15';
+    const key = googleMapsApiKey();
+
+    if (!this.state.height || !this.state.width) {
+      // wait for the real height/width to not consume to much rate from google.
+      return '';
+    }
 
     // See all options at https://developers.google.com/maps/documentation/static-maps/intro
     const params = {
@@ -81,7 +86,6 @@ class GoogleMapsWidgetComponent extends React.Component {
       ie: 'UTF8',
     };
 
-    const key = googleMapsApiKey();
     if (key) {
       params.key = key;
     }
