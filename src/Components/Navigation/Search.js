@@ -56,12 +56,15 @@ const SearchBox = Scrivito.connect(class extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     event.stopPropagation();
-    const newParams = { q: this.state.q };
-    Scrivito.navigateTo(() => Scrivito.Obj.getByPermalink('search_results'), newParams);
+    Scrivito.navigateTo(oldestSearchResultsPage, { q: this.state.q });
     this.setState({ q: '' });
     this.props.toggleSearch();
   }
 });
+
+function oldestSearchResultsPage() {
+  return Scrivito.Obj.where('_objClass', 'equals', 'SearchResults').order('_createdAt').take(1)[0];
+}
 
 function SearchIcon({ toggleSearch }) {
   if (Scrivito.currentPage() && Scrivito.currentPage().objClass() === 'SearchResults') {
