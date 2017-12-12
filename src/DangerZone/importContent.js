@@ -166,6 +166,7 @@ const ThumbnailGalleryWidget = Scrivito.getClass('ThumbnailGalleryWidget');
 const TickListItemWidget = Scrivito.getClass('TickListItemWidget');
 const TickListWidget = Scrivito.getClass('TickListWidget');
 const VideoWidget = Scrivito.getClass('VideoWidget');
+const YoutubeVideoWidget = Scrivito.getClass('YoutubeVideoWidget');
 
 const UNSPLASH_TAGS = ['source: unsplash.com'];
 const DEFAULT_TAGS = ['Design', 'Development', 'Marketing', 'Business'];
@@ -2356,6 +2357,13 @@ function importContent() {
           }),
         ] }),
         new SectionWidget({
+          content: [
+            new YoutubeVideoWidget({
+              youtubeVideoId: 'wrLzv5s8_fE',
+            }),
+          ],
+        }),
+        new SectionWidget({
           backgroundColor: 'greywhite',
           content: [
             createEvenColumnContainerWidget({
@@ -3514,6 +3522,35 @@ function importContent() {
                 [
                   new VideoWidget({
                     source: videoWaterfall1,
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          showPadding: 'no',
+          content: [
+            new HeadlineWidget({
+              headline: 'YouTube Video Widget',
+            }),
+            create3to9ColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new TextWidget({
+                    alignment: 'left',
+                    text: `<p>Widget properties:</p>
+                      <ul>
+                        <li>YouTube video ID</li>
+                        <li>Aspect ratio</li>
+                      </ul>`,
+                  }),
+                ],
+                // col 2
+                [
+                  new YoutubeVideoWidget({
+                    youtubeVideoId: 'wrLzv5s8_fE',
                   }),
                 ],
               ],
