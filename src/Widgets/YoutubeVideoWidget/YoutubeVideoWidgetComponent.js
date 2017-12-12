@@ -72,6 +72,9 @@ function PlaceholderOrYoutubeComponent({ youtubeVideoId, width, height }) {
       src={ `https://www.youtube.com/embed/${youtubeVideoId}` }
       frameBorder="0"
       gesture="media"
+      allowFullScreen="true"
+      webkitallowfullscreen="true"
+      mozallowfullscreen="true"
     />
   );
 }
