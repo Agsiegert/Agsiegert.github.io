@@ -2925,6 +2925,40 @@ function importContent() {
           showPadding: 'no',
           content: [
             new HeadlineWidget({
+              headline: 'Google Maps Widget',
+            }),
+            create3to9ColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new TextWidget({
+                    alignment: 'left',
+                    text: `<p>Set the Google Maps API key in the site settings.
+                      If no API key is given, the map may not be rendered.</p>
+                      <p>Widget properties:</p>
+                      <ul>
+                        <li>Address</li>
+                        <li>Zoom level</li>
+                        <li>Show widgets?</li>
+                      </ul>
+                      `,
+                  }),
+                ],
+                // col 2
+                [
+                  new GoogleMapsWidget({
+                    address: 'Times Square, New York City, USA',
+                    zoom: '12',
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          showPadding: 'no',
+          content: [
+            new HeadlineWidget({
               headline: 'Headline Widget',
             }),
             create3to9ColumnContainerWidget({
