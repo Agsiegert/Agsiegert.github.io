@@ -23,7 +23,7 @@ Scrivito.provideEditingConfig('Homepage', {
       title: 'Divider logo',
       description: 'Used in the divider widget',
     },
-    facebookId: {
+    facebookAppId: {
       title: 'Facebook app ID',
       description: 'Register at https://developers.facebook.com/docs/apps/register',
     },
@@ -46,7 +46,7 @@ Scrivito.provideEditingConfig('Homepage', {
         'logoDark',
         'logoWhite',
         'dividerLogo',
-        'facebookId',
+        'facebookAppId',
         'twitterSite',
         'googleMapsApiKey',
       ],

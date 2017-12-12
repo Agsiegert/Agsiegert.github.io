@@ -10,9 +10,9 @@ function getMetaData(page) {
   ];
   const textExtract = textExtractFromObj(page);
 
-  const facebookId = Scrivito.Obj.root().get('facebookId');
-  if (facebookId) {
-    meta.push({ property: 'fb:app_id', content: facebookId });
+  const facebookAppId = Scrivito.Obj.root().get('facebookAppId');
+  if (facebookAppId) {
+    meta.push({ property: 'fb:app_id', content: facebookAppId });
   }
 
   const twitterSite = Scrivito.Obj.root().get('twitterSite');

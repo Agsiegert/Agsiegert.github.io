@@ -10,7 +10,7 @@ const Homepage = Scrivito.provideObjClass('Homepage', {
     logoDark: 'reference',
     logoWhite: 'reference',
     dividerLogo: 'reference',
-    facebookId: 'string',
+    facebookAppId: 'string',
     twitterSite: 'string',
     googleMapsApiKey: 'string',
     ...socialCardsAttributes,
