@@ -23,18 +23,17 @@ Scrivito.provideEditingConfig('Homepage', {
       title: 'Divider logo',
       description: 'Used in the divider widget',
     },
-    facebookId: {
+    facebookAppId: {
       title: 'Facebook app ID',
       description: 'Register at https://developers.facebook.com/docs/apps/register',
     },
-    twitterId: {
-      title: 'Twitter site ID',
+    twitterSite: {
+      title: 'Twitter site',
       description: 'Needs to be approved at https://cards-dev.twitter.com/validator',
     },
     googleMapsApiKey: {
       title: 'Google Maps API key',
-      description: 'Needs to be requested at' +
-        ' https://developers.google.com/maps/documentation/static-maps/',
+      description: 'Needs to be requested at https://developers.google.com/maps/web/',
     },
   },
   properties: [
@@ -47,8 +46,8 @@ Scrivito.provideEditingConfig('Homepage', {
         'logoDark',
         'logoWhite',
         'dividerLogo',
-        'facebookId',
-        'twitterId',
+        'facebookAppId',
+        'twitterSite',
         'googleMapsApiKey',
       ],
     },
