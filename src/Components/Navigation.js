@@ -1,4 +1,4 @@
-import Scroll from 'react-scroll';
+import { Element as ScrollElement } from 'react-scroll';
 import currentPageNavigationOptions from './Navigation/currentPageNavigationOptions';
 import FullNavigation from './Navigation/FullNavigation';
 import LandingPageNavigation from './Navigation/LandingPageNavigation';
@@ -127,7 +127,7 @@ class Navigation extends React.Component {
           <NavigationSection heigthClassName={ heigthClassName } />
           <ScrollToNextSectionLink heigthClassName={ heigthClassName } />
         </Scrivito.BackgroundImageTag>
-        <Scroll.Element name="nextSection" />
+        <ScrollElement name="nextSection" />
       </React.Fragment>
     );
   }
