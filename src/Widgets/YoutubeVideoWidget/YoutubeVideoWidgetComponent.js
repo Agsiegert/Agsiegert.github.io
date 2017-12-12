@@ -46,13 +46,25 @@ class YoutubeVideoWidgetComponent extends React.Component {
       >
         <iframe
           width={ this.state.elementWidth }
-          height={ this.state.elementWidth / (16 / 9) }
+          height={ this.state.elementWidth / this.aspectRatio() }
           src={ `https://www.youtube.com/embed/${youtubeVideoId}` }
           frameBorder="0"
           gesture="media"
         />
       </div>
     );
+  }
+
+  aspectRatio() {
+    switch (this.props.widget.get('aspectRatio')) {
+      case '21:9': return 21 / 9;
+      case '16:9': return 16 / 9;
+      case '4:3': return 4 / 3;
+      case '1:1': return 1;
+      case '3:4': return 3 / 4;
+      case '9:16': return 9 / 16;
+      default: return 16 / 9;
+    }
   }
 }
 
