@@ -29,5 +29,6 @@ Scrivito.provideEditingConfig('YoutubeVideoWidget', {
   ],
   initialContent: {
     aspectRatio: '16:9',
+    youtubeVideoId: 'Ys1w9A4DrO4',
   },
 });
