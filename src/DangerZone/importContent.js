@@ -2060,6 +2060,7 @@ function importContent() {
     // WIDGETS AND PAGES
     const homeV1 = Page.create({
       _path: '/widgets_and_pages/home_v1',
+      _permalink: 'widgets-and-pages',
       title: 'Homepage Variant 1',
       navigationBackgroundImage: unsplashArchitecture,
       navigationHeight: 'full-height',
