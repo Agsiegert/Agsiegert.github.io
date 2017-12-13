@@ -2060,7 +2060,6 @@ function importContent() {
     // WIDGETS AND PAGES
     const homeV1 = Page.create({
       _path: '/widgets_and_pages/home_v1',
-      _permalink: 'widgets-and-pages',
       title: 'Homepage Variant 1',
       navigationBackgroundImage: unsplashArchitecture,
       navigationHeight: 'full-height',
@@ -2534,6 +2533,7 @@ function importContent() {
     });
     const widgetsAndPages = Page.create({
       _path: '/widgets_and_pages',
+      _permalink: 'widgets-and-pages',
       title: 'Widgets & Pages',
       childOrder: [homeV1, homeV2, landingPage],
       body: [
