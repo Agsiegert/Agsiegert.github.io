@@ -1,8 +1,8 @@
-import videoWidgetIcon from 'assets/images/video_widget.svg';
+import vimeoVideoWidgetIcon from 'assets/images/vimeo_video_widget.png';
 
 Scrivito.provideEditingConfig('VimeoVideoWidget', {
   title: 'Vimeo Video',
-  thumbnail: `/${videoWidgetIcon}`,
+  thumbnail: `/${vimeoVideoWidgetIcon}`,
   attributes: {
     vimeoVideoId: {
       title: 'Vimeo video ID',
