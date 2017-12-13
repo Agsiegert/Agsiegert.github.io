@@ -779,7 +779,7 @@ function importContent() {
     });
     const landingPage = LandingPage.create({
       _path: '/widgets_and_pages/landing_page',
-      _permalink: 'landing_page',
+      _permalink: 'landing-page',
       title: 'Landing Page',
       navigationHeight: 'full-height',
       navigationBackgroundImageGradient: 'yes',
@@ -3603,7 +3603,7 @@ function importContent() {
     // Search results page
     SearchResults.create({
       navigationBackgroundImage: unsplashGlassesSunset,
-      _permalink: 'search_results',
+      _permalink: 'search-results',
     });
 
     // Obj.root()
