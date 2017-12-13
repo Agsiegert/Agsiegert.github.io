@@ -14,7 +14,7 @@ Scrivito.provideEditingConfig('VimeoVideoWidget', {
       title: 'Aspect ratio',
       description: 'Default: HD TV (16:9)',
       values: [
-        { value: '21:9', title: 'Cinema scope (21:9)' },
+        { value: '21:9', title: 'CinemaScope (21:9)' },
         { value: '16:9', title: 'HD TV (16:9)' },
         { value: '4:3', title: 'Traditional TV (4:3)' },
         { value: '1:1', title: 'Square (1:1)' },
