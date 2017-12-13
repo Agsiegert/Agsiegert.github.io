@@ -166,6 +166,8 @@ const ThumbnailGalleryWidget = Scrivito.getClass('ThumbnailGalleryWidget');
 const TickListItemWidget = Scrivito.getClass('TickListItemWidget');
 const TickListWidget = Scrivito.getClass('TickListWidget');
 const VideoWidget = Scrivito.getClass('VideoWidget');
+const VimeoVideoWidget = Scrivito.getClass('VimeoVideoWidget');
+const YoutubeVideoWidget = Scrivito.getClass('YoutubeVideoWidget');
 
 const UNSPLASH_TAGS = ['source: unsplash.com'];
 const DEFAULT_TAGS = ['Design', 'Development', 'Marketing', 'Business'];
@@ -1041,6 +1043,16 @@ function importContent() {
                 [createBoxWidgetWithIconHeadlineAndText('fa-clone', 'Tons of widgets')],
                 [createBoxWidgetWithIconHeadlineAndText('fa-mobile', 'Fully responsive')],
               ],
+            }),
+            new DividerWidget({}),
+          ],
+        }),
+        new SectionWidget({
+          backgroundColor: 'greydark',
+          showPadding: 'no',
+          content: [
+            new VimeoVideoWidget({
+              vimeoVideoId: '15069551',
             }),
             new DividerWidget({}),
           ],
@@ -2356,6 +2368,13 @@ function importContent() {
           }),
         ] }),
         new SectionWidget({
+          content: [
+            new YoutubeVideoWidget({
+              youtubeVideoId: 'wrLzv5s8_fE',
+            }),
+          ],
+        }),
+        new SectionWidget({
           backgroundColor: 'greywhite',
           content: [
             createEvenColumnContainerWidget({
@@ -3514,6 +3533,64 @@ function importContent() {
                 [
                   new VideoWidget({
                     source: videoWaterfall1,
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          showPadding: 'no',
+          content: [
+            new HeadlineWidget({
+              headline: 'Vimeo Video Widget',
+            }),
+            create3to9ColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new TextWidget({
+                    alignment: 'left',
+                    text: `<p>Widget properties:</p>
+                      <ul>
+                        <li>Vimeo video ID</li>
+                        <li>Aspect ratio</li>
+                      </ul>`,
+                  }),
+                ],
+                // col 2
+                [
+                  new VimeoVideoWidget({
+                    vimeoVideoId: '15069551',
+                  }),
+                ],
+              ],
+            }),
+          ],
+        }),
+        new SectionWidget({
+          showPadding: 'no',
+          content: [
+            new HeadlineWidget({
+              headline: 'YouTube Video Widget',
+            }),
+            create3to9ColumnContainerWidget({
+              columns: [
+                // col 1
+                [
+                  new TextWidget({
+                    alignment: 'left',
+                    text: `<p>Widget properties:</p>
+                      <ul>
+                        <li>YouTube video ID</li>
+                        <li>Aspect ratio</li>
+                      </ul>`,
+                  }),
+                ],
+                // col 2
+                [
+                  new YoutubeVideoWidget({
+                    youtubeVideoId: 'wrLzv5s8_fE',
                   }),
                 ],
               ],
