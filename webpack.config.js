@@ -114,7 +114,7 @@ module.exports = (env = {}) => {
           }),
         },
         {
-          test: /\.(jpg|png|eot|svg|ttf|woff|woff2|gif)$/,
+          test: /\.(jpg|png|eot|svg|ttf|woff|woff2|gif|html)$/,
           use: [
             {
               loader: 'file-loader',
