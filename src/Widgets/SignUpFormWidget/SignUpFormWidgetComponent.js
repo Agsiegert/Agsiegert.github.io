@@ -1,5 +1,3 @@
-import './signUpForm.html';
-
 class SignUpFormWidgetComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -39,11 +37,7 @@ class SignUpFormWidgetComponent extends React.Component {
 
     return (
       <div className={ classNames.join(' ') }>
-        <form method="post" onSubmit={ this.onSubmit.bind(this) }>
-          <input type="hidden" name="form-name" value="signUp" />
-          <div className="hidden">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
-          </div>
+        <form onSubmit={ this.onSubmit.bind(this) }>
           <Scrivito.ContentTag
             content={ widget }
             attribute="title"
@@ -55,7 +49,6 @@ class SignUpFormWidgetComponent extends React.Component {
             <input
               className="form-control input-lg"
               id="signUpUsername"
-              name="Username"
               placeholder="Username"
               type="text"
             />
@@ -65,7 +58,6 @@ class SignUpFormWidgetComponent extends React.Component {
             <input
               className="form-control input-lg"
               id="SignUpEmail"
-              name="Email"
               placeholder="alice@example.org"
               type="email"
             />
@@ -75,7 +67,6 @@ class SignUpFormWidgetComponent extends React.Component {
             <input
               className="form-control input-lg"
               id="SignUpPassword1"
-              name="Password1"
               placeholder="Password"
               type="password"
             />
@@ -85,7 +76,6 @@ class SignUpFormWidgetComponent extends React.Component {
             <input
               className="form-control input-lg"
               id="SignUpPassword2"
-              name="Password2"
               placeholder="Confirm Password"
               type="password"
             />
@@ -95,7 +85,6 @@ class SignUpFormWidgetComponent extends React.Component {
               <input
                 type="checkbox"
                 value="true"
-                name="agreementRead"
                 onClick={ this.toggle.bind(this) }
               />
               I read the licence agreement.
