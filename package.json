@@ -57,7 +57,6 @@
   "scripts": {
     "build": "webpack -p",
     "start": "webpack-dev-server --open",
-    "serve:design": "webpack-dev-server --config webpack.design.config.js",
     "scrivito": "npm run scrivito:build && npm run scrivito:copy && npm run scrivito:prune && npm run scrivito:commit",
     "scrivito:build": "cd ../rails_connector && bundle && bundle exec rake package:build_js",
     "scrivito:copy": "rm -rf vendor/scrivito && mkdir -p vendor/scrivito && cp ../rails_connector/js/build/scrivito/* vendor/scrivito && cp ../rails_connector/js/public/scrivito/index.html vendor/scrivito",

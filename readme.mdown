@@ -48,10 +48,6 @@ Calling `npm run build` will compile all js, html and css and place it in the `b
 
 Calling `npm start` will start a webserver, which listens to [localhost:8080](http://localhost:8080/) and opens that site in your browser. It should also automatically reload the page, once changes to the code (in `src/`) have been made.
 
-## How to develop design
-
-Calling `npm run serve:design` will start a webserver, which listens to [localhost:4000](http://localhost:4000/). It will serve all files from the folder `design/` and the file `src/assets/stylesheets/index.scss` as [http://localhost:4000/index.css](http://localhost:4000/index.css).
-
 ## How to reset/import content
 
 * Visit http://localhost:8080/scrivito
