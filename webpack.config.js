@@ -67,7 +67,6 @@ module.exports = (env = {}) => {
       index: './index.js',
       scrivito_extensions: './scrivito_extensions.js',
       'index.css': './assets/stylesheets/index.scss',
-      danger_zone: './danger_zone.js',
     },
     module: {
       rules: [
