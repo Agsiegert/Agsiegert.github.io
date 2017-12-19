@@ -1,5 +1,3 @@
-/* eslint no-console: 0 */
-
 import isString from 'utils/isString';
 import textExtractFromHtml from 'utils/textExtractFromHtml';
 import { lookupTextExtract } from 'utils/textExtractRegistry';

@@ -1,4 +1,3 @@
-/* eslint no-console: 0 */
 import isString from 'utils/isString';
 
 const textExtractRegistry = {};
