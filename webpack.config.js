@@ -67,7 +67,6 @@ module.exports = (env = {}) => {
       index: './index.js',
       scrivito_extensions: './scrivito_extensions.js',
       'index.css': './assets/stylesheets/index.scss',
-      danger_zone: './danger_zone.js',
     },
     module: {
       rules: [
@@ -139,14 +138,15 @@ module.exports = (env = {}) => {
       modules: ['src', 'node_modules'],
     },
     devServer: {
-      // host: '0.0.0.0',
-      // disableHostCheck: true,
       port: 8080,
       historyApiFallback: {
         rewrites: [
           { from: /^\/scrivito/, to: '/scrivito/index.html' },
           { from: /./, to: '/index.html' },
         ],
+      },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
       },
     },
   };

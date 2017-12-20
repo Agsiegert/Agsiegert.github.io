@@ -5,5 +5,3 @@ import ReactDOM from 'react-dom';
 window.PropTypes = PropTypes;
 window.React = React;
 window.ReactDOM = ReactDOM;
-
-window.ExampleApp = {};

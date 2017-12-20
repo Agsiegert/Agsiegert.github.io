@@ -34,7 +34,6 @@
     "inline-environment-variables-webpack-plugin": "^1.2.1",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "lorem-ipsum": "^1.0.4",
     "moment-from-now": "0.0.4",
     "node-sass": "^4.7.2",
     "progress-bar-webpack-plugin": "^1.10.0",
@@ -57,7 +56,6 @@
   "scripts": {
     "build": "webpack -p",
     "start": "webpack-dev-server --open",
-    "serve:design": "webpack-dev-server --config webpack.design.config.js",
     "scrivito": "npm run scrivito:build && npm run scrivito:copy && npm run scrivito:prune && npm run scrivito:commit",
     "scrivito:build": "cd ../rails_connector && bundle && bundle exec rake package:build_js",
     "scrivito:copy": "rm -rf vendor/scrivito && mkdir -p vendor/scrivito && cp ../rails_connector/js/build/scrivito/* vendor/scrivito && cp ../rails_connector/js/public/scrivito/index.html vendor/scrivito",
