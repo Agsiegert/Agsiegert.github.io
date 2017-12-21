@@ -158,15 +158,18 @@ function allTags(images) {
 function lightboxOptions(galleryImageWidget) {
   const image = galleryImageWidget.get('image');
   let srcUrl = '';
+  let alt = '';
 
   if (image) {
     const binary = image.get('blob');
     srcUrl = binary.transform({ width: fullScreenWidthPixels() }).url();
+    alt = image.get('alternativeText');
   }
 
   return {
     src: srcUrl,
     thumbnail: srcUrl,
     caption: [galleryImageWidget.get('title'), galleryImageWidget.get('subtitle')].join(' - '),
+    alt,
   };
 }

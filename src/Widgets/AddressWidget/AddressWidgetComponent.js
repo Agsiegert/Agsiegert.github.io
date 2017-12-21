@@ -61,7 +61,7 @@ const Logo = Scrivito.connect(() => {
 
   return (
     <Scrivito.LinkTag to={ Scrivito.Obj.root() }>
-      <Scrivito.ImageTag content={ logo } className="logo" />
+      <Scrivito.ImageTag content={ logo } className="logo" alt="Logo" />
     </Scrivito.LinkTag>
   );
 });

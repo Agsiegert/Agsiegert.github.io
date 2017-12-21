@@ -13,9 +13,15 @@ Scrivito.provideEditingConfig('ImageWidget', {
         { value: 'right', title: 'Right' },
       ],
     },
+    alternativeText: {
+      title: 'Alternative text',
+      description: 'Brief description of what the image is about.' +
+        ' If empty, the alternative text of the image is used.',
+    },
   },
   properties: [
     'alignment',
+    'alternativeText',
   ],
   initialContent: {
     alignment: 'left',

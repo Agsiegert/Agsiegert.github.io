@@ -24,7 +24,7 @@ Scrivito.provideComponent('CarouselWidget', ({ widget }) => {
           images.map((image, index) => {
             return (
               <Carousel.Item key={ `${image.id()}${index}` }>
-                <Scrivito.ImageTag content={ image } />
+                <Scrivito.ImageTag content={ image } alt={ image.get('alternativeText') } />
               </Carousel.Item>
             );
           })
@@ -44,7 +44,7 @@ function DescriptionBox({ widget }) {
     <div className="container">
       <div className="client-wrapper">
         <div className="client-logo">
-          <Scrivito.ImageTag content={ widget } attribute="descriptionLogo" />
+          <Scrivito.ImageTag content={ widget } attribute="descriptionLogo" alt="Logo" />
         </div>
         <div className="client-text">
           <Scrivito.ContentTag content={ widget } attribute="description" />

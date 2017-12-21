@@ -18,7 +18,11 @@ function GalleryWidgetComponent({ widget }) {
       <Slider { ...settings } className="slickslide">
         {
           images.map((image, index) =>
-            <Scrivito.ImageTag content={ image } key={ `${image.id()}${index}` } />)
+            <Scrivito.ImageTag
+              content={ image }
+              key={ `${image.id()}${index}` }
+              alt={ image.get('alternativeText') }
+            />)
         }
       </Slider>
     </div>
