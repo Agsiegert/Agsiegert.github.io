@@ -4,12 +4,13 @@ Scrivito.provideEditingConfig('Image', {
       title: 'Tags',
       description: 'Make it easier to find this Image by adding some tags.',
     },
-    title: {
-      title: 'Title',
+    alternativeText: {
+      title: 'Alternative text',
+      description: 'Brief description of what the image is about.',
     },
   },
   properties: [
-    'title',
+    'alternativeText',
     'tags',
   ],
 });
