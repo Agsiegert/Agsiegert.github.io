@@ -11,7 +11,7 @@ const PreviewImage = Scrivito.connect(({ item }) => {
 
   return (
     <Scrivito.LinkTag to={ item } className="result-image">
-      <Scrivito.ImageTag content={ image } />
+      <Scrivito.ImageTag content={ image } alt={ image.get('alternativeText') } />
     </Scrivito.LinkTag>
   );
 });
