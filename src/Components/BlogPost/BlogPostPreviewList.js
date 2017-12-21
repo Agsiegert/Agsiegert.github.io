@@ -101,7 +101,11 @@ const BlogPostTitleImage = Scrivito.connect(({ post }) => {
 
   return (
     <Scrivito.LinkTag to={ post }>
-      <Scrivito.ImageTag content={ titleImage } className="img-responsive" />
+      <Scrivito.ImageTag
+        content={ titleImage }
+        className="img-responsive"
+        alt={ titleImage.get('alternativeText') }
+      />
     </Scrivito.LinkTag>
   );
 });
