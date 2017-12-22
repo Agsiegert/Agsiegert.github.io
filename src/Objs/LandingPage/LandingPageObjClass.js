@@ -1,6 +1,6 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
 import metaDataAttributes from '../_metaDataAttributes';
-import { defaultPageAttributes } from '../_defaultPageAttributes';
+import defaultPageAttributes from '../_defaultPageAttributes';
 
 const LandingPage = Scrivito.provideObjClass('LandingPage', {
   attributes: {

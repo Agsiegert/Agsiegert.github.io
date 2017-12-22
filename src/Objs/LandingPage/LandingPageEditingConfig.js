@@ -4,7 +4,7 @@ import {
   defaultGeneralProperties,
   defaultInitialContent,
   defaultPageUiConfigAttributes,
-} from '../_defaultPageAttributes';
+} from '../_defaultPageEditingConfig';
 
 Scrivito.provideEditingConfig('LandingPage', {
   title: 'Landing Page',
