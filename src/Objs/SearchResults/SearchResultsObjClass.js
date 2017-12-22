@@ -1,4 +1,4 @@
-import { metaDataAttributes } from '../_metaDataAttributes';
+import metaDataAttributes from '../_metaDataAttributes';
 
 const SearchResults = Scrivito.provideObjClass('SearchResults', {
   attributes: {

@@ -1,5 +1,5 @@
 import landingPageObjIcon from 'assets/images/landing_page_obj.svg';
-import { socialCardsCustomGroup } from '../_metaDataAttributes';
+import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
 import {
   defaultGeneralProperties,
   defaultInitialContent,

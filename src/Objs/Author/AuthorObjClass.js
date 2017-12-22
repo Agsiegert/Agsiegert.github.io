@@ -1,5 +1,5 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
-import { metaDataAttributes } from '../_metaDataAttributes';
+import metaDataAttributes from '../_metaDataAttributes';
 
 const Author = Scrivito.provideObjClass('Author', {
   attributes: {

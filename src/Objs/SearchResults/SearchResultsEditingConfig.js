@@ -1,5 +1,5 @@
 import SearchResultsObjIcon from 'assets/images/search_results_obj.svg';
-import { socialCardsCustomGroup } from '../_metaDataAttributes';
+import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('SearchResults', {
   title: 'Search Results',

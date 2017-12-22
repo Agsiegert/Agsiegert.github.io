@@ -1,5 +1,5 @@
 import authorObjIcon from 'assets/images/author_obj.svg';
-import { socialCardsCustomGroup } from '../_metaDataAttributes';
+import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Author', {
   title: 'Author',

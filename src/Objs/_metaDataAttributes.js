@@ -10,12 +10,4 @@ const metaDataAttributes = {
   ogTitle: 'string',
 };
 
-const socialCardsCustomGroup = {
-  title: 'Social cards',
-  component: 'SocialCardsTab',
-};
-
-export {
-  metaDataAttributes,
-  socialCardsCustomGroup,
-};
+export default metaDataAttributes;
