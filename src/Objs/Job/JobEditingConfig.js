@@ -2,6 +2,7 @@ import jobObjIcon from 'assets/images/job_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
 import {
   metaDataEditingConfigAttributes,
+  metaDataInitialContent,
   metaDataPropertiesGroup,
   socialCardsPropertiesGroup,
 } from '../_metaDataEditingConfig';
@@ -30,6 +31,7 @@ Scrivito.provideEditingConfig('Job', {
   ],
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
+    ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
   titleForContent: obj => obj.get('title'),

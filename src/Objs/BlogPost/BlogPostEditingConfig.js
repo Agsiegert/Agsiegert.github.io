@@ -2,6 +2,7 @@ import blogPostObjIcon from 'assets/images/blog_post_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
 import {
   metaDataEditingConfigAttributes,
+  metaDataInitialContent,
   metaDataPropertiesGroup,
   socialCardsPropertiesGroup,
 } from '../_metaDataEditingConfig';
@@ -35,6 +36,7 @@ Scrivito.provideEditingConfig('BlogPost', {
   ],
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
+    ...metaDataInitialContent,
     body: [new SectionWidget({})],
     publishedAt: () => new Date(),
   },

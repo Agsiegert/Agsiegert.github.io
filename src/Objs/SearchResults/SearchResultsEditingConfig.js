@@ -1,6 +1,7 @@
 import SearchResultsObjIcon from 'assets/images/search_results_obj.svg';
 import {
   metaDataEditingConfigAttributes,
+  metaDataInitialContent,
   metaDataPropertiesGroup,
   socialCardsPropertiesGroup,
 } from '../_metaDataEditingConfig';
@@ -24,4 +25,7 @@ Scrivito.provideEditingConfig('SearchResults', {
     'navigationBackgroundImage',
   ],
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
+  initialContent: {
+    ...metaDataInitialContent,
+  },
 });

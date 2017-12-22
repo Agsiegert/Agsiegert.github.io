@@ -2,6 +2,7 @@ import blogObjIcon from 'assets/images/blog_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
 import {
   metaDataEditingConfigAttributes,
+  metaDataInitialContent,
   metaDataPropertiesGroup,
   socialCardsPropertiesGroup,
 } from '../_metaDataEditingConfig';
@@ -26,6 +27,7 @@ Scrivito.provideEditingConfig('Blog', {
   ],
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
+    ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
   titleForContent: obj => obj.get('title'),

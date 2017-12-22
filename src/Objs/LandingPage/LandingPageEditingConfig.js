@@ -6,6 +6,7 @@ import {
 } from '../_defaultPageEditingConfig';
 import {
   metaDataEditingConfigAttributes,
+  metaDataInitialContent,
   metaDataPropertiesGroup,
   socialCardsPropertiesGroup,
 } from '../_metaDataEditingConfig';
@@ -23,6 +24,7 @@ Scrivito.provideEditingConfig('LandingPage', {
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
     ...defaultPageInitialContent,
+    ...metaDataInitialContent,
   },
   titleForContent: obj => obj.get('title'),
 });

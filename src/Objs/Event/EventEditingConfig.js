@@ -2,6 +2,7 @@ import eventObjIcon from 'assets/images/event_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
 import {
   metaDataEditingConfigAttributes,
+  metaDataInitialContent,
   metaDataPropertiesGroup,
   socialCardsPropertiesGroup,
 } from '../_metaDataEditingConfig';
@@ -39,6 +40,7 @@ Scrivito.provideEditingConfig('Event', {
   ],
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
+    ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
   titleForContent: obj => obj.get('title'),
