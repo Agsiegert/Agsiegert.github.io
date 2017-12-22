@@ -1,4 +1,6 @@
 const metaDataAttributes = {
+  // Meta tags
+  metaDataDescription: 'string',
   // Twitter attributes
   tcCreator: 'string',
   tcDescription: 'string',
