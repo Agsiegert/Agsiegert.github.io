@@ -5,12 +5,17 @@ Scrivito.provideEditingConfig('SearchResults', {
   title: 'Search Results',
   thumbnail: `/${SearchResultsObjIcon}`,
   attributes: {
+    title: {
+      title: 'Title',
+      description: 'Limit to 55 characters.',
+    },
     navigationBackgroundImage: {
       title: 'Header image',
       description: 'The background image of the header.',
     },
   },
   properties: [
+    'title',
     'navigationBackgroundImage',
   ],
   propertiesGroups: [socialCardsCustomGroup],
