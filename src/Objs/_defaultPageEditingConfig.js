@@ -1,6 +1,6 @@
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
 
-const defaultPageUiConfigAttributes = {
+const defaultPageEditingConfigAttributes = {
   title: {
     title: 'Title',
     description: 'Limit to 55 characters.',
@@ -28,21 +28,21 @@ const defaultPageUiConfigAttributes = {
   },
 };
 
-const defaultGeneralProperties = [
+const defaultPageInitialContent = {
+  body: [new SectionWidget({})],
+  navigationHeight: 'small',
+  navigationBackgroundImageGradient: 'no',
+};
+
+const defaultPageProperties = [
   'title',
   'navigationHeight',
   'navigationBackgroundImage',
   'navigationBackgroundImageGradient',
 ];
 
-const defaultInitialContent = {
-  body: [new SectionWidget({})],
-  navigationHeight: 'small',
-  navigationBackgroundImageGradient: 'no',
-};
-
 export {
-  defaultGeneralProperties,
-  defaultInitialContent,
-  defaultPageUiConfigAttributes,
+  defaultPageEditingConfigAttributes,
+  defaultPageInitialContent,
+  defaultPageProperties,
 };

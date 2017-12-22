@@ -1,8 +1,8 @@
 import homepageObjIcon from 'assets/images/homepage_obj.svg';
 import {
-  defaultGeneralProperties,
-  defaultInitialContent,
-  defaultPageUiConfigAttributes,
+  defaultPageEditingConfigAttributes,
+  defaultPageInitialContent,
+  defaultPageProperties,
 } from '../_defaultPageEditingConfig';
 import {
   metaDataEditingConfigAttributes,
@@ -14,7 +14,7 @@ Scrivito.provideEditingConfig('Homepage', {
   title: 'Homepage',
   thumbnail: `/${homepageObjIcon}`,
   attributes: {
-    ...defaultPageUiConfigAttributes,
+    ...defaultPageEditingConfigAttributes,
     ...metaDataEditingConfigAttributes,
     logoDark: {
       title: 'Dark logo',
@@ -42,7 +42,7 @@ Scrivito.provideEditingConfig('Homepage', {
     },
   },
   properties: [
-    ...defaultGeneralProperties,
+    ...defaultPageProperties,
   ],
   propertiesGroups: [
     {
@@ -60,7 +60,7 @@ Scrivito.provideEditingConfig('Homepage', {
     metaDataPropertiesGroup,
   ],
   initialContent: {
-    ...defaultInitialContent,
+    ...defaultPageInitialContent,
   },
   titleForContent: obj => obj.get('title'),
 });

@@ -1,8 +1,8 @@
 import landingPageObjIcon from 'assets/images/landing_page_obj.svg';
 import {
-  defaultGeneralProperties,
-  defaultInitialContent,
-  defaultPageUiConfigAttributes,
+  defaultPageEditingConfigAttributes,
+  defaultPageInitialContent,
+  defaultPageProperties,
 } from '../_defaultPageEditingConfig';
 import {
   metaDataEditingConfigAttributes,
@@ -14,15 +14,15 @@ Scrivito.provideEditingConfig('LandingPage', {
   title: 'Landing Page',
   thumbnail: `/${landingPageObjIcon}`,
   attributes: {
-    ...defaultPageUiConfigAttributes,
+    ...defaultPageEditingConfigAttributes,
     ...metaDataEditingConfigAttributes,
   },
   properties: [
-    ...defaultGeneralProperties,
+    ...defaultPageProperties,
   ],
   propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
-    ...defaultInitialContent,
+    ...defaultPageInitialContent,
   },
   titleForContent: obj => obj.get('title'),
 });
