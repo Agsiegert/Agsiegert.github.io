@@ -4,7 +4,6 @@ import urlFromBinary from 'utils/urlFromBinary';
 
 function getMetaData(page) {
   const meta = [
-    { name: 'generator', content: 'Scrivito by Infopark AG (scrivito.com)' },
     { name: 'twitter:card', content: 'summary_large_image' },
     { property: 'og:type', content: 'article' },
     { property: 'og:url', content: Scrivito.urlFor(page) },
