@@ -40,5 +40,4 @@ Scrivito.provideEditingConfig('BlogPost', {
     body: [new SectionWidget({})],
     publishedAt: () => new Date(),
   },
-  titleForContent: obj => obj.get('title'),
 });

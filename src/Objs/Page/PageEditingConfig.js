@@ -26,5 +26,4 @@ Scrivito.provideEditingConfig('Page', {
     ...defaultPageInitialContent,
     ...metaDataInitialContent,
   },
-  titleForContent: obj => obj.get('title'),
 });

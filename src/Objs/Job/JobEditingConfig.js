@@ -34,5 +34,4 @@ Scrivito.provideEditingConfig('Job', {
     ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
-  titleForContent: obj => obj.get('title'),
 });

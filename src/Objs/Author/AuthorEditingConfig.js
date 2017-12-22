@@ -30,5 +30,4 @@ Scrivito.provideEditingConfig('Author', {
   initialContent: {
     ...metaDataInitialContent,
   },
-  titleForContent: obj => obj.get('title'),
 });

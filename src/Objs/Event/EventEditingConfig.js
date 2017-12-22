@@ -43,5 +43,4 @@ Scrivito.provideEditingConfig('Event', {
     ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
-  titleForContent: obj => obj.get('title'),
 });
