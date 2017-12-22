@@ -1,6 +1,6 @@
 import blogPostObjIcon from 'assets/images/blog_post_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+import { socialCardsCustomGroup } from '../_metaDataAttributes';
 
 Scrivito.provideEditingConfig('BlogPost', {
   title: 'Blog Post',

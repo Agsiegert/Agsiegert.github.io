@@ -1,5 +1,5 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
-import { socialCardsAttributes } from '../_socialCardsAttributes';
+import { socialCardsAttributes } from '../_metaDataAttributes';
 
 const Blog = Scrivito.provideObjClass('Blog', {
   attributes: {

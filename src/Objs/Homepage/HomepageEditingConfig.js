@@ -4,7 +4,7 @@ import {
   defaultInitialContent,
   defaultPageUiConfigAttributes,
 } from '../_defaultPageAttributes';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+import { socialCardsCustomGroup } from '../_metaDataAttributes';
 
 Scrivito.provideEditingConfig('Homepage', {
   title: 'Homepage',

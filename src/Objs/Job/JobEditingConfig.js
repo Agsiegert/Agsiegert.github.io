@@ -1,6 +1,6 @@
 import jobObjIcon from 'assets/images/job_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+import { socialCardsCustomGroup } from '../_metaDataAttributes';
 
 Scrivito.provideEditingConfig('Job', {
   title: 'Job',
