@@ -1,10 +1,10 @@
 const metaDataAttributes = {
-  // Twitter Attributes
+  // Twitter attributes
   tcCreator: 'string',
   tcDescription: 'string',
   tcImage: 'reference',
   tcTitle: 'string',
-  // Open Graph attributes
+  // Open Graph attributes (used by Facebook)
   ogDescription: 'string',
   ogImage: 'reference',
   ogTitle: 'string',
