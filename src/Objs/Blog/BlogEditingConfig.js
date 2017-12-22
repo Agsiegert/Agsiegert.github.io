@@ -8,7 +8,7 @@ Scrivito.provideEditingConfig('Blog', {
   attributes: {
     title: {
       title: 'Title',
-      description: 'The title is only used for the navigation.',
+      description: 'Limit to 55 characters.',
     },
     navigationBackgroundImage: {
       title: 'Header image',

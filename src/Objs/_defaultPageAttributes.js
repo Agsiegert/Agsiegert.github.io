@@ -18,6 +18,7 @@ const defaultPageAttributes = {
 const defaultPageUiConfigAttributes = {
   title: {
     title: 'Title',
+    description: 'Limit to 55 characters.',
   },
   navigationBackgroundImage: {
     title: 'Header image',

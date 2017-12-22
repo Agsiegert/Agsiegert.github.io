@@ -18,6 +18,7 @@ Scrivito.provideEditingConfig('Event', {
     },
     title: {
       title: 'Title',
+      description: 'Limit to 55 characters.',
     },
     tags: {
       title: 'Tags',
