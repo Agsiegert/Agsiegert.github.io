@@ -6,6 +6,7 @@ Scrivito.provideEditingConfig('Download', {
     },
     title: {
       title: 'Title',
+      description: 'Limit to 55 characters.',
     },
   },
   properties: [

@@ -1,12 +1,12 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
-import { socialCardsAttributes } from '../_socialCardsAttributes';
-import { defaultPageAttributes } from '../_defaultPageAttributes';
+import metaDataAttributes from '../_metaDataAttributes';
+import defaultPageAttributes from '../_defaultPageAttributes';
 
 const Page = Scrivito.provideObjClass('Page', {
   attributes: {
     ...defaultPageAttributes,
     childOrder: 'referencelist',
-    ...socialCardsAttributes,
+    ...metaDataAttributes,
   },
 });
 

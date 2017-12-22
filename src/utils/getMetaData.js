@@ -11,6 +11,16 @@ function getMetaData(page) {
   ];
   const textExtract = textExtractFromObj(page);
 
+  const robotsIndex = page.get('robotsIndex');
+  if (robotsIndex === 'no') {
+    meta.push({ name: 'robots', content: 'noindex' });
+  }
+
+  const description = page.get('metaDataDescription');
+  if (description) {
+    meta.push({ name: 'description', content: description });
+  }
+
   const facebookAppId = Scrivito.Obj.root().get('facebookAppId');
   if (facebookAppId) {
     meta.push({ property: 'fb:app_id', content: facebookAppId });

@@ -1,12 +1,12 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
-import { socialCardsAttributes } from '../_socialCardsAttributes';
+import metaDataAttributes from '../_metaDataAttributes';
 
 const Author = Scrivito.provideObjClass('Author', {
   attributes: {
     title: 'string',
     description: 'string',
     image: 'reference',
-    ...socialCardsAttributes,
+    ...metaDataAttributes,
   },
 });
 

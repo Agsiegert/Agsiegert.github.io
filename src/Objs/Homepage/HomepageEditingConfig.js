@@ -1,16 +1,22 @@
 import homepageObjIcon from 'assets/images/homepage_obj.svg';
 import {
-  defaultGeneralProperties,
-  defaultInitialContent,
-  defaultPageUiConfigAttributes,
-} from '../_defaultPageAttributes';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+  defaultPageEditingConfigAttributes,
+  defaultPageInitialContent,
+  defaultPageProperties,
+} from '../_defaultPageEditingConfig';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataInitialContent,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Homepage', {
   title: 'Homepage',
   thumbnail: `/${homepageObjIcon}`,
   attributes: {
-    ...defaultPageUiConfigAttributes,
+    ...defaultPageEditingConfigAttributes,
+    ...metaDataEditingConfigAttributes,
     logoDark: {
       title: 'Dark logo',
       description: 'Used with light backgrounds',
@@ -37,7 +43,7 @@ Scrivito.provideEditingConfig('Homepage', {
     },
   },
   properties: [
-    ...defaultGeneralProperties,
+    ...defaultPageProperties,
   ],
   propertiesGroups: [
     {
@@ -51,10 +57,11 @@ Scrivito.provideEditingConfig('Homepage', {
         'googleMapsApiKey',
       ],
     },
-    socialCardsCustomGroup,
+    socialCardsPropertiesGroup,
+    metaDataPropertiesGroup,
   ],
   initialContent: {
-    ...defaultInitialContent,
+    ...defaultPageInitialContent,
+    ...metaDataInitialContent,
   },
-  titleForContent: obj => obj.get('title'),
 });

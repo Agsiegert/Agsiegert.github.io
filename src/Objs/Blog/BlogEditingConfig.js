@@ -1,14 +1,20 @@
 import blogObjIcon from 'assets/images/blog_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataInitialContent,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Blog', {
   title: 'Blog',
   thumbnail: `/${blogObjIcon}`,
   attributes: {
+    ...metaDataEditingConfigAttributes,
     title: {
       title: 'Title',
-      description: 'The title is only used for the navigation.',
+      description: 'Limit to 55 characters.',
     },
     navigationBackgroundImage: {
       title: 'Header image',
@@ -19,9 +25,9 @@ Scrivito.provideEditingConfig('Blog', {
     'title',
     'navigationBackgroundImage',
   ],
-  propertiesGroups: [socialCardsCustomGroup],
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
+    ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
-  titleForContent: obj => obj.get('title'),
 });

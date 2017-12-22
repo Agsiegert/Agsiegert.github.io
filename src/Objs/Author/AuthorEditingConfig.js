@@ -1,10 +1,16 @@
 import authorObjIcon from 'assets/images/author_obj.svg';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataInitialContent,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Author', {
   title: 'Author',
   thumbnail: `/${authorObjIcon}`,
   attributes: {
+    ...metaDataEditingConfigAttributes,
     title: {
       title: 'Name',
     },
@@ -20,6 +26,8 @@ Scrivito.provideEditingConfig('Author', {
     'description',
     'image',
   ],
-  propertiesGroups: [socialCardsCustomGroup],
-  titleForContent: obj => obj.get('title'),
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
+  initialContent: {
+    ...metaDataInitialContent,
+  },
 });

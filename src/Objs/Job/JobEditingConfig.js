@@ -1,11 +1,17 @@
 import jobObjIcon from 'assets/images/job_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
-import { socialCardsCustomGroup } from '../_socialCardsAttributes';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataInitialContent,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Job', {
   title: 'Job',
   thumbnail: `/${jobObjIcon}`,
   attributes: {
+    ...metaDataEditingConfigAttributes,
     image: {
       title: 'Image',
     },
@@ -15,6 +21,7 @@ Scrivito.provideEditingConfig('Job', {
     },
     title: {
       title: 'Title',
+      description: 'Limit to 55 characters.',
     },
   },
   properties: [
@@ -22,9 +29,9 @@ Scrivito.provideEditingConfig('Job', {
     'location',
     'image',
   ],
-  propertiesGroups: [socialCardsCustomGroup],
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
+    ...metaDataInitialContent,
     body: [new SectionWidget({})],
   },
-  titleForContent: obj => obj.get('title'),
 });

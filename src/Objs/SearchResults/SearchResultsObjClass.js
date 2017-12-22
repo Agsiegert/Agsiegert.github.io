@@ -1,9 +1,10 @@
-import { socialCardsAttributes } from '../_socialCardsAttributes';
+import metaDataAttributes from '../_metaDataAttributes';
 
 const SearchResults = Scrivito.provideObjClass('SearchResults', {
   attributes: {
+    title: 'string',
     navigationBackgroundImage: 'reference',
-    ...socialCardsAttributes,
+    ...metaDataAttributes,
   },
 });
 

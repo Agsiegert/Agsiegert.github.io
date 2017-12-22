@@ -1,5 +1,5 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
-import { socialCardsAttributes } from '../_socialCardsAttributes';
+import metaDataAttributes from '../_metaDataAttributes';
 
 const Job = Scrivito.provideObjClass('Job', {
   attributes: {
@@ -7,7 +7,7 @@ const Job = Scrivito.provideObjClass('Job', {
     image: 'reference',
     location: 'string',
     title: 'string',
-    ...socialCardsAttributes,
+    ...metaDataAttributes,
   },
 });
 
