@@ -1,11 +1,16 @@
 import jobObjIcon from 'assets/images/job_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
-import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Job', {
   title: 'Job',
   thumbnail: `/${jobObjIcon}`,
   attributes: {
+    ...metaDataEditingConfigAttributes,
     image: {
       title: 'Image',
     },
@@ -23,7 +28,7 @@ Scrivito.provideEditingConfig('Job', {
     'location',
     'image',
   ],
-  propertiesGroups: [socialCardsCustomGroup],
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
     body: [new SectionWidget({})],
   },

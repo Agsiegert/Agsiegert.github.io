@@ -1,10 +1,15 @@
 import SearchResultsObjIcon from 'assets/images/search_results_obj.svg';
-import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('SearchResults', {
   title: 'Search Results',
   thumbnail: `/${SearchResultsObjIcon}`,
   attributes: {
+    ...metaDataEditingConfigAttributes,
     title: {
       title: 'Title',
       description: 'Limit to 55 characters.',
@@ -18,5 +23,5 @@ Scrivito.provideEditingConfig('SearchResults', {
     'title',
     'navigationBackgroundImage',
   ],
-  propertiesGroups: [socialCardsCustomGroup],
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
 });

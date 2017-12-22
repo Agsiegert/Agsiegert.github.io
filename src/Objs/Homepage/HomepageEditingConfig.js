@@ -4,13 +4,18 @@ import {
   defaultInitialContent,
   defaultPageUiConfigAttributes,
 } from '../_defaultPageEditingConfig';
-import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Homepage', {
   title: 'Homepage',
   thumbnail: `/${homepageObjIcon}`,
   attributes: {
     ...defaultPageUiConfigAttributes,
+    ...metaDataEditingConfigAttributes,
     logoDark: {
       title: 'Dark logo',
       description: 'Used with light backgrounds',
@@ -51,7 +56,8 @@ Scrivito.provideEditingConfig('Homepage', {
         'googleMapsApiKey',
       ],
     },
-    socialCardsCustomGroup,
+    socialCardsPropertiesGroup,
+    metaDataPropertiesGroup,
   ],
   initialContent: {
     ...defaultInitialContent,

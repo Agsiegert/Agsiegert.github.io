@@ -1,21 +1,26 @@
 import PageObjIcon from 'assets/images/page_obj.svg';
-import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
 import {
   defaultGeneralProperties,
   defaultInitialContent,
   defaultPageUiConfigAttributes,
 } from '../_defaultPageEditingConfig';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('Page', {
   title: 'Page',
   thumbnail: `/${PageObjIcon}`,
   attributes: {
     ...defaultPageUiConfigAttributes,
+    ...metaDataEditingConfigAttributes,
   },
   properties: [
     ...defaultGeneralProperties,
   ],
-  propertiesGroups: [socialCardsCustomGroup],
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
     ...defaultInitialContent,
   },

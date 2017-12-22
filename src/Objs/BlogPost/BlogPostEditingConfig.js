@@ -1,11 +1,16 @@
 import blogPostObjIcon from 'assets/images/blog_post_obj.svg';
 import SectionWidget from 'Widgets/SectionWidget/SectionWidgetClass';
-import { socialCardsCustomGroup } from '../_metaDataEditingConfig';
+import {
+  metaDataEditingConfigAttributes,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
+} from '../_metaDataEditingConfig';
 
 Scrivito.provideEditingConfig('BlogPost', {
   title: 'Blog Post',
   thumbnail: `/${blogPostObjIcon}`,
   attributes: {
+    ...metaDataEditingConfigAttributes,
     author: {
       title: 'Author',
     },
@@ -28,7 +33,7 @@ Scrivito.provideEditingConfig('BlogPost', {
     'titleImage',
     'tags',
   ],
-  propertiesGroups: [socialCardsCustomGroup],
+  propertiesGroups: [socialCardsPropertiesGroup, metaDataPropertiesGroup],
   initialContent: {
     body: [new SectionWidget({})],
     publishedAt: () => new Date(),

@@ -1,13 +1,24 @@
-const metaDataCustomGroup = {
-  title: 'Meta data',
+const metaDataEditingConfigAttributes = {
+  metaDataDescription: {
+    title: 'Page description',
+    description: 'Limit to 175, ideally 150 characters.',
+  },
 };
 
-const socialCardsCustomGroup = {
+const metaDataPropertiesGroup = {
+  title: 'Meta data',
+  properties: [
+    'metaDataDescription',
+  ],
+};
+
+const socialCardsPropertiesGroup = {
   title: 'Social cards',
   component: 'SocialCardsTab',
 };
 
 export {
-  metaDataCustomGroup,
-  socialCardsCustomGroup,
+  metaDataEditingConfigAttributes,
+  metaDataPropertiesGroup,
+  socialCardsPropertiesGroup,
 };
