@@ -1,4 +1,4 @@
-const socialCardsAttributes = {
+const metaDataAttributes = {
   // Twitter Attributes
   tcCreator: 'string',
   tcDescription: 'string',
@@ -16,6 +16,6 @@ const socialCardsCustomGroup = {
 };
 
 export {
-  socialCardsAttributes,
+  metaDataAttributes,
   socialCardsCustomGroup,
 };

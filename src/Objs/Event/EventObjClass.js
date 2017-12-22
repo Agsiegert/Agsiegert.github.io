@@ -1,5 +1,5 @@
 import { registerTextExtract } from 'utils/textExtractRegistry';
-import { socialCardsAttributes } from '../_metaDataAttributes';
+import { metaDataAttributes } from '../_metaDataAttributes';
 
 const Event = Scrivito.provideObjClass('Event', {
   attributes: {
@@ -9,7 +9,7 @@ const Event = Scrivito.provideObjClass('Event', {
     location: 'string',
     title: 'string',
     tags: 'stringlist',
-    ...socialCardsAttributes,
+    ...metaDataAttributes,
   },
 });
 
