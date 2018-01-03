@@ -1,6 +1,6 @@
 import './contactForm.html';
-/* The html file isneeded to Netlify Form handling, updates to inputs in this file should be
-added to the html filw as well.
+/* This html file is needed for Netlify Form handling, updates to inputs in this file should be
+added to the html file as well:
 https://www.netlify.com/blog/2017/07/20/how-to-integrate-netlifys-form-handling-in-a-react-app/
 */
 
