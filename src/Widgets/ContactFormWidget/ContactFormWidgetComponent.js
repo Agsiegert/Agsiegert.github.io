@@ -24,6 +24,7 @@ Scrivito.provideComponent('ContactFormWidget', ({ widget }) =>
             name="contactName"
             placeholder="Name"
             type="text"
+            required
           />
         </div>
       </div>
@@ -36,6 +37,7 @@ Scrivito.provideComponent('ContactFormWidget', ({ widget }) =>
             name="contactFamilyName"
             placeholder="Family name"
             type="text"
+            required
           />
         </div>
       </div>
@@ -48,6 +50,7 @@ Scrivito.provideComponent('ContactFormWidget', ({ widget }) =>
             name="contactEmail"
             placeholder="Email"
             type="email"
+            required
           />
         </div>
       </div>
@@ -72,6 +75,7 @@ Scrivito.provideComponent('ContactFormWidget', ({ widget }) =>
             id="contactMessage"
             name="contactMessage"
             placeholder="Your Message..."
+            required
           />
         </div>
         {
