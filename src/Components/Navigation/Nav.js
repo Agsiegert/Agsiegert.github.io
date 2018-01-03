@@ -47,7 +47,7 @@ class BaseDropdown extends React.Component {
   render() {
     const child = this.props.child;
 
-    const classNames = ['dropdown'];
+    const classNames = [];
     if (this.state.open) { classNames.push('open'); }
     if (isActive(child)) { classNames.push('active'); }
 
@@ -60,10 +60,10 @@ class BaseDropdown extends React.Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          { child.get('title') }<span className="caret"></span>
+          { child.get('title') }
         </Scrivito.LinkTag>
         <span
-          className="mobile-toggle"
+          className="menu-toggle"
           onClick={
             e => {
               this.toggleOpen();
