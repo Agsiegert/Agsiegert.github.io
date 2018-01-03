@@ -13,7 +13,7 @@ Scrivito.provideComponent('ContactFormWidget', ({ widget }) =>
         value="contact"
       />
       <div className="hidden">
-          <label>Don’t fill this out: <input name="bot-field" /></label>
+        <label>Don’t fill this out: <input name="bot-field" /></label>
       </div>
       <div className="col-sm-6">
         <div className="form-group">
