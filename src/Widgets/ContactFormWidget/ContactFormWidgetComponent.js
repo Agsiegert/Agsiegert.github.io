@@ -56,7 +56,7 @@ Scrivito.provideComponent('ContactFormWidget', ({ widget }) =>
       </div>
       <div className="col-sm-6">
         <div className="form-group">
-          <label htmlFor="contactCompany">Company</label>
+          <label htmlFor="contactCompany">Company (optional)</label>
           <input
             className="form-control input-lg"
             id="contactCompany"
