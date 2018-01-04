@@ -621,7 +621,7 @@ footer {
 
   .navbar-nav { margin: 0; padding: 20px 15px; background: #fff; }
   .navbar-nav > li > a,
-  .bg-dark-image .navbar-nav > li > a { color: $theme-greydark!important; display: block; }
+  .navbar-default .navbar-nav > li > a { color: $theme-greydark!important; display: block; }
   .navbar-nav .dropdown-menu > li > a { text-align: left; padding: 10px 20px; color: #fff; }
 
   .navbar-collapse { padding: 0; border: 0; }
