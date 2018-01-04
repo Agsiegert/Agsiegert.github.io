@@ -1,27 +1,27 @@
-function Nav({ toggleExpanded }) {
+function Nav({ closeExpanded }) {
   return (
     <Scrivito.ChildListTag
       className="nav navbar-nav navbar-right"
       parent={ Scrivito.Obj.root() }
-      renderChild={ child => renderChild(child, toggleExpanded) }
+      renderChild={ child => renderChild(child, closeExpanded) }
     />
   );
 }
 
-function renderChild(child, toggleExpanded) {
+function renderChild(child, closeExpanded) {
   if (child.children().length === 0) {
-    return renderSingleChild(child, toggleExpanded);
+    return renderSingleChild(child, closeExpanded);
   }
 
-  return <Dropdown child={ child } toggleExpanded={ toggleExpanded } />;
+  return <Dropdown child={ child } closeExpanded={ closeExpanded } />;
 }
 
-function renderSingleChild(child, toggleExpanded) {
+function renderSingleChild(child, closeExpanded) {
   const classNames = [];
   if (isActive(child)) { classNames.push('active'); }
 
   return (
-    <li className={ classNames.join(' ') } onClick={ toggleExpanded }>
+    <li className={ classNames.join(' ') } onClick={ closeExpanded }>
       <Scrivito.LinkTag to={ child }>
         { child.get('title') }
       </Scrivito.LinkTag>
@@ -52,7 +52,7 @@ class BaseDropdown extends React.Component {
     if (isActive(child)) { classNames.push('active'); }
 
     return (
-      <li className={ classNames.join(' ') } onClick={ this.props.toggleExpanded }>
+      <li className={ classNames.join(' ') } onClick={ this.props.closeExpanded }>
         <Scrivito.LinkTag
           to={ child }
           className="dropdown-toggle"
@@ -77,7 +77,7 @@ class BaseDropdown extends React.Component {
           className="dropdown-menu"
           parent={ child }
           renderChild={
-            innerChild => renderSingleChild(innerChild, this.props.toggleExpanded)
+            innerChild => renderSingleChild(innerChild, this.props.closeExpanded)
           }
         />
       </li>
