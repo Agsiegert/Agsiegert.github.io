@@ -1,3 +1,5 @@
+import supportsTouchEvents from 'utils/supportsTouchEvents';
+
 function Nav({ closeExpanded }) {
   return (
     <Scrivito.ChildListTag
@@ -37,11 +39,16 @@ class BaseDropdown extends React.Component {
       open: false,
     };
 
-    this.toggleOpen = this.toggleOpen.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
-  toggleOpen() {
+  toggleDropdown() {
     this.setState({ open: !this.state.open });
+  }
+
+  closeDropdown() {
+    this.setState({ open: false });
   }
 
   render() {
@@ -51,8 +58,21 @@ class BaseDropdown extends React.Component {
     if (this.state.open) { classNames.push('open'); }
     if (isActive(child)) { classNames.push('active'); }
 
+    const topLevelProps = {
+      className: classNames.join(' '),
+      onClick: () => {
+        this.props.closeExpanded();
+        this.closeDropdown();
+      },
+    };
+
+    if (!supportsTouchEvents()) {
+      topLevelProps.onMouseEnter = this.toggleDropdown;
+      topLevelProps.onMouseLeave = this.closeDropdown;
+    }
+
     return (
-      <li className={ classNames.join(' ') } onClick={ this.props.closeExpanded }>
+      <li { ...topLevelProps }>
         <Scrivito.LinkTag
           to={ child }
           className="dropdown-toggle"
@@ -66,7 +86,7 @@ class BaseDropdown extends React.Component {
           className="menu-toggle"
           onClick={
             e => {
-              this.toggleOpen();
+              this.toggleDropdown();
               e.stopPropagation();
             }
           }
