@@ -1,29 +1,66 @@
 import supportsTouchEvents from 'utils/supportsTouchEvents';
 
-function Nav({ closeExpanded }) {
+class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.registeredDropdowns = [];
+
+    this.closeAll = this.closeAll.bind(this);
+    this.closeDropdowns = this.closeDropdowns.bind(this);
+    this.registerDropdown = this.registerDropdown.bind(this);
+  }
+
+  closeAll() {
+    this.props.closeExpanded();
+    this.closeDropdowns();
+  }
+
+  closeDropdowns() {
+    this.registeredDropdowns.forEach(dropdown => dropdown.closeDropdown());
+  }
+
+  registerDropdown(dropdownComponent) {
+    this.registeredDropdowns.push(dropdownComponent);
+  }
+
+  render() {
+    return (
+      <Scrivito.ChildListTag
+        className="nav navbar-nav navbar-right"
+        parent={ Scrivito.Obj.root() }
+        renderChild={
+          child => renderChild(child, this.registerDropdown, this.closeAll, this.closeDropdowns)
+        }
+      />
+    );
+  }
+}
+
+function renderChild(child, registerDropdown, closeAll, closeDropdowns) {
+  if (child.children().length === 0) {
+    return renderSingleChild(child, closeAll);
+  }
+
   return (
-    <Scrivito.ChildListTag
-      className="nav navbar-nav navbar-right"
-      parent={ Scrivito.Obj.root() }
-      renderChild={ child => renderChild(child, closeExpanded) }
+    <Dropdown
+      child={ child }
+      registerDropdown={ registerDropdown }
+      closeAll={ closeAll }
+      closeDropdowns={ closeDropdowns }
     />
   );
 }
 
-function renderChild(child, closeExpanded) {
-  if (child.children().length === 0) {
-    return renderSingleChild(child, closeExpanded);
-  }
-
-  return <Dropdown child={ child } closeExpanded={ closeExpanded } />;
-}
-
-function renderSingleChild(child, closeExpanded) {
+function renderSingleChild(child, closeAll) {
   const classNames = [];
   if (isActive(child)) { classNames.push('active'); }
 
   return (
-    <li className={ classNames.join(' ') } onClick={ closeExpanded }>
+    <li
+      className={ classNames.join(' ') }
+      onClick={ closeAll }
+    >
       <Scrivito.LinkTag to={ child }>
         { child.get('title') }
       </Scrivito.LinkTag>
@@ -41,10 +78,14 @@ class BaseDropdown extends React.Component {
 
     this.closeDropdown = this.closeDropdown.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+
+    this.props.registerDropdown(this);
   }
 
   toggleDropdown() {
-    this.setState({ open: !this.state.open });
+    const newOpen = !this.state.open;
+    this.props.closeDropdowns();
+    this.setState({ open: newOpen });
   }
 
   closeDropdown() {
@@ -60,10 +101,7 @@ class BaseDropdown extends React.Component {
 
     const topLevelProps = {
       className: classNames.join(' '),
-      onClick: () => {
-        this.props.closeExpanded();
-        this.closeDropdown();
-      },
+      onClick: this.props.closeAll,
     };
 
     if (!supportsTouchEvents()) {
@@ -97,7 +135,7 @@ class BaseDropdown extends React.Component {
           className="dropdown-menu"
           parent={ child }
           renderChild={
-            innerChild => renderSingleChild(innerChild, this.props.closeExpanded)
+            innerChild => renderSingleChild(innerChild, this.props.closeAll)
           }
         />
       </li>
