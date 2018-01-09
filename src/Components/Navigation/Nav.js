@@ -1,3 +1,4 @@
+import pull from 'lodash/pull';
 import supportsTouchEvents from 'utils/supportsTouchEvents';
 
 class Nav extends React.Component {
@@ -9,6 +10,7 @@ class Nav extends React.Component {
     this.closeAll = this.closeAll.bind(this);
     this.closeDropdowns = this.closeDropdowns.bind(this);
     this.registerDropdown = this.registerDropdown.bind(this);
+    this.unregisterDropdown = this.unregisterDropdown.bind(this);
   }
 
   closeAll() {
@@ -24,20 +26,30 @@ class Nav extends React.Component {
     this.registeredDropdowns.push(dropdownComponent);
   }
 
+  unregisterDropdown(dropdownComponent) {
+    pull(this.registeredDropdowns, dropdownComponent);
+  }
+
   render() {
     return (
       <Scrivito.ChildListTag
         className="nav navbar-nav navbar-right"
         parent={ Scrivito.Obj.root() }
         renderChild={
-          child => renderChild(child, this.registerDropdown, this.closeAll, this.closeDropdowns)
+          child => renderChild({
+            child,
+            registerDropdown: this.registerDropdown,
+            unregisterDropdown: this.unregisterDropdown,
+            closeAll: this.closeAll,
+            closeDropdowns: this.closeDropdowns,
+          })
         }
       />
     );
   }
 }
 
-function renderChild(child, registerDropdown, closeAll, closeDropdowns) {
+function renderChild({ child, registerDropdown, unregisterDropdown, closeAll, closeDropdowns }) {
   if (child.children().length === 0) {
     return renderSingleChild(child, closeAll);
   }
@@ -46,6 +58,7 @@ function renderChild(child, registerDropdown, closeAll, closeDropdowns) {
     <Dropdown
       child={ child }
       registerDropdown={ registerDropdown }
+      unregisterDropdown={ unregisterDropdown }
       closeAll={ closeAll }
       closeDropdowns={ closeDropdowns }
     />
@@ -82,6 +95,10 @@ class BaseDropdown extends React.Component {
 
   componentDidMount() {
     this.props.registerDropdown(this);
+  }
+
+  componentWillUnmount() {
+    this.props.unregisterDropdown(this);
   }
 
   toggleDropdown() {
