@@ -310,7 +310,7 @@ class GridLayoutEditor extends React.Component {
       }
 
       return (
-        <div key={ `grid-col-${colIndex}` } className={ `grid-col-${colSize}` }>
+        <div key={ `grid-col-${colIndex}` } className={ `grid-col-${colSize} noselect` }>
           { innerContent }
         </div>
       );
