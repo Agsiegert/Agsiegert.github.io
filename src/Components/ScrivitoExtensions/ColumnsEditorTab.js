@@ -111,6 +111,7 @@ class ColumnsEditorTab extends React.Component {
               />
             </div>
           </div>
+          <GridLayoutEditor currentGrid={ this.state.currentGrid } />
         </div>
       </div>
     );
@@ -194,6 +195,63 @@ const VerticalAlignment = Scrivito.connect(({ widget }) => {
     </React.Fragment>
   );
 });
+
+const GridLayoutEditor = ({ currentGrid }) => {
+  return (
+    <div className="gle">
+      <div className="grid-ruler">
+        { times(12).map(index => <div key={ index } className="grid-col" />) }
+      </div>
+      <div className="grid-columns">
+        {
+          currentGrid.map((colSize, index) =>
+            <GridColumn
+              key={ index }
+              colSize={ colSize }
+              index={ index }
+              maxLength={ currentGrid.length }
+            />
+          )
+        }
+      </div>
+    </div>
+  );
+};
+
+function GridColumn({ colSize, index, maxLength }) {
+  const innerContent = [];
+
+  const showAddButton = ((index + 1) === maxLength) && maxLength < 6;
+  if (showAddButton) {
+    innerContent.push(
+      <div
+        key="addHandle"
+        className="grid-handle grid-handle-plus"
+        title="add a column"
+      />
+    );
+  } else {
+    innerContent.push(
+      <div
+        key="basicHandle"
+        className="grid-handle"
+      />
+    );
+  }
+
+  innerContent.push(<div key="numberHandle" className="grid-label">{ colSize }</div>);
+
+  const showDeleteButton = maxLength > 1;
+  if (showDeleteButton) {
+    innerContent.push(<div key="deleteHandle" className="grid-del" title="delete column" />);
+  }
+
+  return (
+    <div className={ `grid-col-${colSize}` }>
+      { innerContent }
+    </div>
+  );
+}
 
 function gridOfWidget(containerWidget) {
   return containerWidget.get('columns').map(column => column.get('colSize'));
