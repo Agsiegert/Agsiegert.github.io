@@ -78,7 +78,9 @@ class BaseDropdown extends React.Component {
 
     this.closeDropdown = this.closeDropdown.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+  }
 
+  componentDidMount() {
     this.props.registerDropdown(this);
   }
 
