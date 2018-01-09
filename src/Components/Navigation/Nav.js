@@ -116,7 +116,7 @@ class BaseDropdown extends React.Component {
           className="dropdown-toggle"
           role="button"
           aria-haspopup="true"
-          aria-expanded="false"
+          aria-expanded={ this.state.open }
         >
           { child.get('title') }
         </Scrivito.LinkTag>
