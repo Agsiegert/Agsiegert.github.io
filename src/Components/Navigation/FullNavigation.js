@@ -56,7 +56,7 @@ class FullNavigation extends React.Component {
 
           <BootstrapCollapse in={ this.state.expanded }>
             <div className="navbar-collapse">
-              <Nav closeExpanded={ this.closeExpanded } />
+              <Nav closeExpanded={ this.closeExpanded } expanded={ this.state.expanded } />
             </div>
           </BootstrapCollapse>
         </div>

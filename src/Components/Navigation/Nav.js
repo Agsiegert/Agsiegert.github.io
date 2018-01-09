@@ -42,6 +42,7 @@ class Nav extends React.Component {
             unregisterDropdown: this.unregisterDropdown,
             closeAll: this.closeAll,
             closeDropdowns: this.closeDropdowns,
+            expanded: this.props.expanded,
           })
         }
       />
@@ -49,7 +50,14 @@ class Nav extends React.Component {
   }
 }
 
-function renderChild({ child, registerDropdown, unregisterDropdown, closeAll, closeDropdowns }) {
+function renderChild({
+  child,
+  registerDropdown,
+  unregisterDropdown,
+  closeAll,
+  closeDropdowns,
+  expanded,
+}) {
   if (child.children().length === 0) {
     return renderSingleChild(child, closeAll);
   }
@@ -61,6 +69,7 @@ function renderChild({ child, registerDropdown, unregisterDropdown, closeAll, cl
       unregisterDropdown={ unregisterDropdown }
       closeAll={ closeAll }
       closeDropdowns={ closeDropdowns }
+      expanded={ expanded }
     />
   );
 }
@@ -123,7 +132,7 @@ class BaseDropdown extends React.Component {
       onClick: this.props.closeAll,
     };
 
-    if (!supportsTouchEvents()) {
+    if (!supportsTouchEvents() && !this.props.expanded) {
       topLevelProps.onMouseEnter = this.toggleDropdown;
       topLevelProps.onMouseLeave = this.closeDropdown;
     }
