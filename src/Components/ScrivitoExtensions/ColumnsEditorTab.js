@@ -123,7 +123,7 @@ class ColumnsEditorTab extends React.Component {
 
     const containerWidget = this.props.widget;
 
-    adjustNrOfColumns(containerWidget, newGrid.length);
+    adjustNumberOfColumns(containerWidget, newGrid.length);
     distributeContents(containerWidget.get('columns'), this.state.originalContents);
     adjustColSize(containerWidget.get('columns'), newGrid);
 
@@ -205,7 +205,7 @@ class GridLayoutEditor extends React.Component {
       draggableGrid: 0,
     };
 
-    this.adjustNrOfColumns = this.adjustNrOfColumns.bind(this);
+    this.adjustNumberOfColumns = this.adjustNumberOfColumns.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.onDragStop = this.onDragStop.bind(this);
   }
@@ -239,7 +239,7 @@ class GridLayoutEditor extends React.Component {
     this.props.adjustGrid(newGrid);
   }
 
-  adjustNrOfColumns(wantedCols) {
+  adjustNumberOfColumns(wantedCols) {
     if (wantedCols > 6 || wantedCols < 1) {
       return;
     }
@@ -293,7 +293,7 @@ class GridLayoutEditor extends React.Component {
             key="grid-handle-plus"
             className="grid-handle grid-handle-plus"
             title="add a column"
-            onClick={ () => this.adjustNrOfColumns(this.props.currentGrid.length + 1) }
+            onClick={ () => this.adjustNumberOfColumns(this.props.currentGrid.length + 1) }
           />
         );
       }
@@ -304,7 +304,7 @@ class GridLayoutEditor extends React.Component {
             key="grid-del"
             className="grid-del"
             title="delete column"
-            onClick={ () => this.adjustNrOfColumns(this.props.currentGrid.length - 1) }
+            onClick={ () => this.adjustNumberOfColumns(this.props.currentGrid.length - 1) }
           />
         );
       }
@@ -337,7 +337,7 @@ function gridOfWidget(containerWidget) {
   return containerWidget.get('columns').map(column => column.get('colSize'));
 }
 
-function adjustNrOfColumns(containerWidget, desiredLength) {
+function adjustNumberOfColumns(containerWidget, desiredLength) {
   const columns = containerWidget.get('columns');
   if (columns.length === desiredLength) { return; }
 
