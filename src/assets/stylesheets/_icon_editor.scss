@@ -2,9 +2,18 @@
  * Icon Editor Tab
  */
 
-.icon-editor-tab {
-  margin-top: 22px
-}
+.icon-editor-tab .icon-editor-preview {
+  background: rgba(255,255,255,.8); padding: 14px 10px 10px 10px;
+  border-radius: 4px; margin: 0 0 10px 0; display: block; width: 60px;
+  text-align: center;
+  }
+.icon-editor-tab .icon-editor-preview .fa { font-size: 22px; }
+
+
+.icon-editor-tab .headline {
+  display: block; border-bottom: 1px solid rgba(0,0,0,.1);
+  font-size: 16px; font-weight: 700; padding: 10px 3px 4px;
+  }
 
 .icon-editor-tab .fa-hover a {
   overflow: hidden;
@@ -16,25 +25,26 @@
   height: 32px;
   padding-left: 10px;
   border-radius: 4px;
+  font-size: 13px;
 }
 
 .icon-editor-tab .fa-hover a .fa {
   width: 32px;
   font-size: 14px;
   display: inline-block;
-  text-align: right;
+  text-align: center;
   margin-right: 10px;
 }
 
 .icon-editor-tab .fa-hover a:hover {
-  background-color: #1d9d74;
-  color: #fff;
+  background-color: #fff;
+  color: #333;
   text-decoration: none;
 }
 
 .icon-editor-tab .fa-hover a:hover .fa {
-  font-size: 28px;
-  vertical-align: -6px;
+  font-size: 24px;
+  vertical-align: -2px;
 }
 
 .icon-editor-tab .fa-hover a:hover .text-muted {
@@ -42,14 +52,15 @@
 }
 
 .icon-editor-tab .fa-hover a.active {
-  background-color: #1d9d74;
-  color: #fff;
+  background-color: #fff;
+  color: #333;
   text-decoration: none;
+  box-shadow: 0 0 0 2px #FF6B6B;
 }
 
 .icon-editor-tab .fa-hover a.active .fa {
-  font-size: 28px;
-  vertical-align: -6px;
+  font-size: 24px;
+  vertical-align: -2px;
 }
 
 .icon-editor-tab .fa-hover a.active .text-muted {
@@ -63,7 +74,7 @@
 #search label {
   position: absolute;
   left: 17px;
-  top: 10px;
+  top: 5px;
 }
 
 #search #search-input {
@@ -76,7 +87,7 @@
   text-decoration: none;
   position: absolute;
   right: 18px;
-  top: 15px;
+  top: 10px;
   color: #b3b3b3;
 }
 

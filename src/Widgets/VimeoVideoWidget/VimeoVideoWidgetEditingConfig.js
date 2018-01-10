@@ -1,4 +1,4 @@
-import vimeoVideoWidgetIcon from 'assets/images/vimeo_video_widget.png';
+import vimeoVideoWidgetIcon from 'assets/images/vimeo_video_widget.svg';
 
 Scrivito.provideEditingConfig('VimeoVideoWidget', {
   title: 'Vimeo Video',

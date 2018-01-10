@@ -1,4 +1,4 @@
-import priceWidgetIcon from 'assets/images/price_widget.png';
+import priceWidgetIcon from 'assets/images/price_widget.svg';
 
 Scrivito.provideEditingConfig('PriceWidget', {
   title: 'Price',

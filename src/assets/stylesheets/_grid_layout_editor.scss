@@ -54,6 +54,7 @@
   background: #fff; border-radius: 3px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 5px; height: 50px;
+  overflow: hidden;
   }
 .gle .grid-ruler {
   position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: 0 -5px;
@@ -119,15 +120,15 @@
 .gle .grid-columns .grid-del { width: 20px; height: 100%; position: absolute; top: 0; left: calc( 50% - 10px); cursor: pointer;}
 .gle .grid-columns .grid-del:after {
   content:'-'; display: none;
-  background: #aaa; box-shadow: 0 0 3px rgba(0,0,0,.1);
-  position: absolute; bottom: -6px; left: 0;
-  width: 20px; height: 12px; border-radius: 2px;
-  font-size: 18px; color: #fff;
+  background: #eee; box-shadow: 0 0 0 2px #aaa;
+  position: absolute; top: 0; left: 0;
+  width: 20px; height: 10px; border-radius: 0 0 1px 1px;
+  font-size: 18px; color: #888;
   text-align: center; line-height: 8px;
   @include transition(all .1s ease-in-out);
   }
 .gle .grid-columns > [class*="grid-col-"]:hover .grid-del:after { display: block; }
-.gle .grid-columns > [class*="grid-col-"] .grid-del:hover:after { background: #aa4040; }
+.gle .grid-columns > [class*="grid-col-"] .grid-del:hover:after { background: #aa4040; box-shadow: 0 0 0 2px #aa4040; color: #fff; }
 
 .gle .grid-columns .grid-label {
   color: #aaa; font-weight:bold;
