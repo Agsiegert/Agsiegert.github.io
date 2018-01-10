@@ -59,7 +59,7 @@ const NavChild = Scrivito.connect(({
   expanded,
 }) => {
   if (child.children().length === 0) {
-    return renderSingleChild(child, closeAll);
+    return <NavSingleChild child={ child } closeAll={ closeAll } />;
   }
 
   return (
@@ -74,7 +74,7 @@ const NavChild = Scrivito.connect(({
   );
 });
 
-function renderSingleChild(child, closeAll) {
+const NavSingleChild = Scrivito.connect(({ child, closeAll }) => {
   const classNames = [];
   if (isActive(child)) { classNames.push('active'); }
 
@@ -88,7 +88,7 @@ function renderSingleChild(child, closeAll) {
       </Scrivito.LinkTag>
     </li>
   );
-}
+});
 
 class BaseDropdown extends React.Component {
   constructor(props) {
@@ -163,7 +163,7 @@ class BaseDropdown extends React.Component {
           className="dropdown-menu"
           parent={ child }
           renderChild={
-            innerChild => renderSingleChild(innerChild, this.props.closeAll)
+            innerChild => <NavSingleChild child={ innerChild } closeAll={ this.props.closeAll } />
           }
         />
       </li>
