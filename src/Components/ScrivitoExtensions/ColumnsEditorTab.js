@@ -325,7 +325,7 @@ class GridLayoutEditor extends React.Component {
             )
           }
         </div>
-        <div className="grid-columns" ref={ e => { this.gridColumns = e; } }>
+        <div className="grid-columns">
           { gridColumns }
         </div>
       </div>
