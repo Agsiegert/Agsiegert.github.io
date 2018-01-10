@@ -36,28 +36,28 @@ class Nav extends React.Component {
         className="nav navbar-nav navbar-right"
         parent={ Scrivito.Obj.root() }
         renderChild={
-          child => renderChild({
-            child,
-            registerDropdown: this.registerDropdown,
-            unregisterDropdown: this.unregisterDropdown,
-            closeAll: this.closeAll,
-            closeDropdowns: this.closeDropdowns,
-            expanded: this.props.expanded,
-          })
+          child => <NavChild
+            child={ child }
+            registerDropdown={ this.registerDropdown }
+            unregisterDropdown={ this.unregisterDropdown }
+            closeAll={ this.closeAll }
+            closeDropdowns={ this.closeDropdowns }
+            expanded={ this.props.expanded }
+          />
         }
       />
     );
   }
 }
 
-function renderChild({
+const NavChild = Scrivito.connect(({
   child,
   registerDropdown,
   unregisterDropdown,
   closeAll,
   closeDropdowns,
   expanded,
-}) {
+}) => {
   if (child.children().length === 0) {
     return renderSingleChild(child, closeAll);
   }
@@ -72,7 +72,7 @@ function renderChild({
       expanded={ expanded }
     />
   );
-}
+});
 
 function renderSingleChild(child, closeAll) {
   const classNames = [];
