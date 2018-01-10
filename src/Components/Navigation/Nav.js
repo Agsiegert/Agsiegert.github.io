@@ -1,4 +1,3 @@
-import pull from 'lodash/pull';
 import NavChild from './NavChild';
 
 class Nav extends React.Component {
@@ -27,7 +26,7 @@ class Nav extends React.Component {
   }
 
   unregisterDropdown(dropdownComponent) {
-    pull(this.registeredDropdowns, dropdownComponent);
+    this.registeredDropdowns = this.registeredDropdowns.filter(i => i !== dropdownComponent);
   }
 
   render() {
