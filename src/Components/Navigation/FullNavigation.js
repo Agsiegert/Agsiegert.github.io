@@ -13,10 +13,15 @@ class FullNavigation extends React.Component {
     };
 
     this.toggleExpanded = this.toggleExpanded.bind(this);
+    this.closeExpanded = this.closeExpanded.bind(this);
   }
 
   toggleExpanded() {
     this.setState({ expanded: !this.state.expanded });
+  }
+
+  closeExpanded() {
+    this.setState({ expanded: false });
   }
 
   render() {
@@ -51,7 +56,7 @@ class FullNavigation extends React.Component {
 
           <BootstrapCollapse in={ this.state.expanded }>
             <div className="navbar-collapse">
-              <Nav toggleExpanded={ this.toggleExpanded } />
+              <Nav closeExpanded={ this.closeExpanded } expanded={ this.state.expanded } />
             </div>
           </BootstrapCollapse>
         </div>

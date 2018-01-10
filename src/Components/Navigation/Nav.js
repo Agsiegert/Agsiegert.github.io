@@ -1,105 +1,52 @@
-function Nav({ toggleExpanded }) {
-  return (
-    <Scrivito.ChildListTag
-      className="nav navbar-nav navbar-right"
-      parent={ Scrivito.Obj.root() }
-      renderChild={ child => renderChild(child, toggleExpanded) }
-    />
-  );
-}
+import NavChild from './NavChild';
 
-function renderChild(child, toggleExpanded) {
-  if (child.children().length === 0) {
-    return renderSingleChild(child, toggleExpanded);
-  }
-
-  return <Dropdown child={ child } toggleExpanded={ toggleExpanded } />;
-}
-
-function renderSingleChild(child, toggleExpanded) {
-  const classNames = [];
-  if (isActive(child)) { classNames.push('active'); }
-
-  return (
-    <li className={ classNames.join(' ') } onClick={ toggleExpanded }>
-      <Scrivito.LinkTag to={ child }>
-        { child.get('title') }
-      </Scrivito.LinkTag>
-    </li>
-  );
-}
-
-class BaseDropdown extends React.Component {
+class Nav extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      open: false,
-    };
+    this.registeredDropdowns = [];
 
-    this.toggleOpen = this.toggleOpen.bind(this);
+    this.closeAll = this.closeAll.bind(this);
+    this.closeDropdowns = this.closeDropdowns.bind(this);
+    this.registerDropdown = this.registerDropdown.bind(this);
+    this.unregisterDropdown = this.unregisterDropdown.bind(this);
   }
 
-  toggleOpen() {
-    this.setState({ open: !this.state.open });
+  closeAll() {
+    this.props.closeExpanded();
+    this.closeDropdowns();
+  }
+
+  closeDropdowns() {
+    this.registeredDropdowns.forEach(dropdown => dropdown.closeDropdown());
+  }
+
+  registerDropdown(dropdownComponent) {
+    this.registeredDropdowns.push(dropdownComponent);
+  }
+
+  unregisterDropdown(dropdownComponent) {
+    this.registeredDropdowns = this.registeredDropdowns.filter(i => i !== dropdownComponent);
   }
 
   render() {
-    const child = this.props.child;
-
-    const classNames = ['dropdown'];
-    if (this.state.open) { classNames.push('open'); }
-    if (isActive(child)) { classNames.push('active'); }
-
     return (
-      <li className={ classNames.join(' ') } onClick={ this.props.toggleExpanded }>
-        <Scrivito.LinkTag
-          to={ child }
-          className="dropdown-toggle"
-          role="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          { child.get('title') }<span className="caret"></span>
-        </Scrivito.LinkTag>
-        <span
-          className="mobile-toggle"
-          onClick={
-            e => {
-              this.toggleOpen();
-              e.stopPropagation();
-            }
-          }
-        >
-          <i className="fa fa-angle-down" aria-hidden="true" />
-        </span>
-        <Scrivito.ChildListTag
-          className="dropdown-menu"
-          parent={ child }
-          renderChild={
-            innerChild => renderSingleChild(innerChild, this.props.toggleExpanded)
-          }
-        />
-      </li>
+      <Scrivito.ChildListTag
+        className="nav navbar-nav navbar-right"
+        parent={ Scrivito.Obj.root() }
+        renderChild={
+          child => <NavChild
+            child={ child }
+            registerDropdown={ this.registerDropdown }
+            unregisterDropdown={ this.unregisterDropdown }
+            closeAll={ this.closeAll }
+            closeDropdowns={ this.closeDropdowns }
+            expanded={ this.props.expanded }
+          />
+        }
+      />
     );
   }
-}
-
-const Dropdown = Scrivito.connect(BaseDropdown);
-
-function isActive(page) {
-  if (!Scrivito.currentPage()) { return false; }
-
-  const currentPath = Scrivito.currentPage().path();
-  if (currentPath) {
-    return currentPath.startsWith(page.path());
-  }
-
-  if (Scrivito.currentPage().objClass() === 'BlogPost') {
-    return page.objClass() === 'Blog';
-  }
-
-  return false;
 }
 
 export default Scrivito.connect(Nav);

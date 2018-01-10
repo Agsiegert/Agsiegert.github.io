@@ -19,6 +19,7 @@
     "Blob": true,
     "console": true,
     "document": true,
+    "DocumentTouch": true,
     "PropTypes": true,
     "React": true,
     "ReactDOM": true,
