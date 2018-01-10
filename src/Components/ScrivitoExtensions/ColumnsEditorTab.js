@@ -253,7 +253,7 @@ class GridLayoutEditor extends React.Component {
   }
 
   render() {
-    const girdColumns = this.props.currentGrid.map((colSize, colIndex) => {
+    const gridColumns = this.props.currentGrid.map((colSize, colIndex) => {
       const innerContent = [
         <div key="grid-label" className="grid-label">
           { colSize }
@@ -326,7 +326,7 @@ class GridLayoutEditor extends React.Component {
           }
         </div>
         <div className="grid-columns" ref={ e => { this.gridColumns = e; } }>
-          { girdColumns }
+          { gridColumns }
         </div>
       </div>
     );
