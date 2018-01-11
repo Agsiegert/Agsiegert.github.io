@@ -1,20 +1,21 @@
 import CurrentPageMetaData from 'Components/CurrentPageMetaData';
+import ErrorBoundary from 'Components/ErrorBoundary';
 import Footer from 'Components/Footer';
 import Navigation from 'Components/Navigation';
 import NotFoundErrorPage from 'Components/NotFoundErrorPage';
-import InternalErrorPage from 'Components/InternalErrorPage';
 
 export default function App() {
   return (
-    <div>
-      <div className="content-wrapper">
-        <Navigation />
-        <Scrivito.CurrentPage />
-        <NotFoundErrorPage />
-        <InternalErrorPage />
+    <ErrorBoundary>
+      <div>
+        <div className="content-wrapper">
+          <Navigation />
+          <Scrivito.CurrentPage />
+          <NotFoundErrorPage />
+        </div>
+        <Footer />
+        <CurrentPageMetaData />
       </div>
-      <Footer />
-      <CurrentPageMetaData />
-    </div>
+    </ErrorBoundary>
   );
 }
