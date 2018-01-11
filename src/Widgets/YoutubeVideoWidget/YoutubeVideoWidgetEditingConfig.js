@@ -1,4 +1,4 @@
-import youtubeVideoWidgetIcon from 'assets/images/youtube_video_widget.png';
+import youtubeVideoWidgetIcon from 'assets/images/youtube_video_widget.svg';
 
 Scrivito.provideEditingConfig('YoutubeVideoWidget', {
   title: 'YouTube Video',

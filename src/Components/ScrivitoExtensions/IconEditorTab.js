@@ -41,7 +41,10 @@ class IconEditorTab extends React.Component {
           <div className="scrivito_detail_label">
             <span>Preview</span>
           </div>
-          <IconComponent icon={ widget.get('icon') } />
+          <div className="icon-editor-preview">
+             <IconComponent icon={ widget.get('icon') } />
+          </div>
+
           <IconSearch
             searchValue={ this.state.searchValue }
             setSearchValue={ this.setSearchValue }

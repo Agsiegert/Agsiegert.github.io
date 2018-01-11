@@ -33,9 +33,6 @@ class AllIcons extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="scrivito_detail_label">
-          <span>All icons</span>
-        </div>
         <div id="icons">
           {
             <CategoriesAndIcons
@@ -87,7 +84,7 @@ function CategoriesAndIcons({ initialRender, categoryMap, currentIcon, setWidget
 function Category({ category, icons, currentIcon, setWidgetIcon }) {
   return (
     <section>
-      <i>{ category }</i>
+      <span className="headline">{ category }</span>
       <div className="row">
         {
           icons.map((icon, innerIndex) => {

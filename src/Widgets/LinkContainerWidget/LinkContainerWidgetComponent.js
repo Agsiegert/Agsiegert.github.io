@@ -24,10 +24,8 @@ const Headline = Scrivito.connect(({ widget }) => {
   }
 
   return (
-    <ul className="page-list">
-      <li className="border-bottom">
-        { widget.get('headline') }
-      </li>
-    </ul>
+    <div className="page-list-headline">
+      { widget.get('headline') }
+    </div>
   );
 });

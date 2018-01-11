@@ -81,15 +81,17 @@ class ThumbnailGalleryComponent extends React.Component {
           setTag={ this.setTag }
         />
         <div className="row">
-          {
-            images.map((image, imageIndex) =>
-              <Thumbnail
-                key={ image.id() }
-                widget={ image }
-                openLightbox={ event => this.openLightbox(imageIndex, event) }
-                currentTag={ this.state.currentTag }
-              />)
-          }
+          <div className="gallery-box-wrapper">
+            {
+              images.map((image, imageIndex) =>
+                <Thumbnail
+                  key={ image.id() }
+                  widget={ image }
+                  openLightbox={ event => this.openLightbox(imageIndex, event) }
+                  currentTag={ this.state.currentTag }
+                />)
+            }
+          </div>
           <Lightbox
             images={ lightboxImages }
             currentImage={ this.state.currentImage }

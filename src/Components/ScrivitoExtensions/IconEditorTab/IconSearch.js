@@ -7,7 +7,7 @@ function IconSearch({ setSearchValue, searchValue }) {
       </label>
       <input
         id="search-input"
-        className="form-control input-lg"
+        className="form-control"
         placeholder="Search icons"
         autoComplete="off"
         spellCheck="false"
