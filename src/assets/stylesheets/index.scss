@@ -462,8 +462,8 @@ footer {
 
 .navbar-default .nav > li:hover > a,
 .navbar-default .nav > li:focus > a { background: transparent; }
-.navbar-default .nav > li.active > a,
-.navbar-default .nav > li.open > a { background: $brand-primary !important; color: #fff !important; }
+.navbar-default .nav > li.active > a { background: $brand-primary !important; color: #fff !important; }
+.navbar-default .nav > li.open > a { background: #bbb !important; color: #fff !important; }
 
 .nav > li:hover > a,
 .nav > li:focus > a { background: transparent; }
@@ -542,14 +542,14 @@ footer {
  line-height: 75px; font-size: 22px;
  text-align: center; margin: 0 auto;
  color: $brand-primary;
- @include transition(all .2s ease-in-out);
+ @include transition(transform .2s ease-in-out);
  }
 .menu-toggle:hover .fa { color: darken( $brand-primary, 15%); }
 .active .menu-toggle .fa { color: #fff; }
 .open .menu-toggle .fa { color: #fff; transform: rotate(180deg);}
 
-.navbar-default .nav > li.active > .menu-toggle,
-.navbar-default .nav > li.open > .menu-toggle { background: $brand-primary !important; color: #fff !important; }
+.navbar-default .nav > li.active > .menu-toggle { background: $brand-primary !important; color: #fff !important; }
+.navbar-default .nav > li.open > .menu-toggle { background: #bbb !important; color: #fff !important; }
 .scrolled.bg-dark-image .navbar-nav > li.active  > a,
 .scrolled.bg-dark-image .navbar-nav > li.open  > a { color: #fff !important; }
 
