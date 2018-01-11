@@ -127,7 +127,6 @@ const Thumbnail = Scrivito.connect(({ widget, openLightbox, currentTag }) => {
   const classNames = ['col-md-3', 'col-sm-4', 'col-xs-6', 'gallery-box', 'gutter0'];
   if (currentTag && tags.includes(currentTag)) { classNames.push('squeezed'); }
 
-
   return (
     <div className={ classNames.join(' ') }>
       <Scrivito.BackgroundImageTag
@@ -143,7 +142,6 @@ const Thumbnail = Scrivito.connect(({ widget, openLightbox, currentTag }) => {
       </a>
     </div>
   );
-
 });
 
 function allTags(images) {

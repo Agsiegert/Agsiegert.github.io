@@ -33,7 +33,6 @@ class AllIcons extends React.Component {
 
     return (
       <React.Fragment>
-
         <div id="icons">
           {
             <CategoriesAndIcons
