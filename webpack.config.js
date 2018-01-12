@@ -131,9 +131,6 @@ module.exports = (env = {}) => {
     },
     plugins: plugins,
     resolve: {
-      alias: {
-        scrivito_sdk: path.join(__dirname, 'vendor/scrivito/scrivito_sdk.js'),
-      },
       extensions: ['.js'],
       modules: ['src', 'node_modules'],
     },
