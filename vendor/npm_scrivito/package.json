@@ -1,0 +1,14 @@
+{
+  "name": "scrivito",
+  "version": "0.0.1",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "prop-types": "^15.6.0",
+    "react": "16.*",
+    "react-dom": "16.*",
+    "speakingurl": "^11.0.0",
+    "tcomb-validation": "^3.4.1",
+    "underscore": "^1.8.3",
+    "urijs": "^1.18.2"
+  }
+}
