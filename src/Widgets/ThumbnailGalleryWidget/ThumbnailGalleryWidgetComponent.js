@@ -118,10 +118,10 @@ const Thumbnail = Scrivito.connect(({ widget, openLightbox, currentTag }) => {
   const image = widget.get('image');
   const tags = widget.get('tags');
 
-  let transformedBinary = null;
+  let optimizedBinary = null;
   if (image) {
-    // Transform image to max. 50% of the screen width
-    transformedBinary = image.get('blob').transform({ width: fullScreenWidthPixels() / 2 });
+    // Optimize image to max. 50% of the screen width
+    optimizedBinary = image.get('blob').optimizeFor({ width: fullScreenWidthPixels() / 2 });
   }
 
   const classNames = ['col-md-3', 'col-sm-4', 'col-xs-6', 'gallery-box', 'gutter0'];
@@ -131,7 +131,7 @@ const Thumbnail = Scrivito.connect(({ widget, openLightbox, currentTag }) => {
     <div className={ classNames.join(' ') }>
       <Scrivito.BackgroundImageTag
         className="gallery-box-image"
-        style={ { background: { image: transformedBinary } } }
+        style={ { background: { image: optimizedBinary } } }
       />
       <a href="#" className="gallery-box-content-wrapper" onClick={ openLightbox }>
         <span className="gallery-box-content">
@@ -164,7 +164,7 @@ function lightboxOptions(galleryImageWidget) {
 
   if (image) {
     const binary = image.get('blob');
-    srcUrl = binary.transform({ width: fullScreenWidthPixels() }).url();
+    srcUrl = binary.optimizeFor({ width: fullScreenWidthPixels() }).url();
     alt = image.get('alternativeText');
   }
 
