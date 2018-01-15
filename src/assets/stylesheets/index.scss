@@ -496,7 +496,9 @@ footer {
 
 .navbar-nav .dropdown-menu > li > a { text-align: center; padding: 5px 10px; }
 .navbar-nav .dropdown-menu > li > a:hover,
-.navbar-nav .dropdown-menu > li > a:focus { background: $brand-primary; color: #fff; }
+.navbar-nav .dropdown-menu > li > a:focus { background: #bbb; color: #fff; }
+.navbar-nav .dropdown-menu > li.active > a:hover,
+.navbar-nav .dropdown-menu > li.active > a:focus { background: $brand-primary; color: #fff; }
 
 .navbar-fixed-top .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
