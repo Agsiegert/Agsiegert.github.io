@@ -53,6 +53,8 @@ $slick-font-path: "~slick-carousel/slick/fonts/";
 $brand-primary: #4ECDC4 !default;
 $brand-secondary: #FF6B6B !default;
 
+$nav-hover: #bbb;
+
 $theme-grey: #2E353C;
 $theme-greydark: #3D4142;
 $theme-greylight: #DADADA;
@@ -462,8 +464,8 @@ footer {
 
 .navbar-default .nav > li:hover > a,
 .navbar-default .nav > li:focus > a { background: transparent; }
-.navbar-default .nav > li.active > a,
-.navbar-default .nav > li.open > a { background: $brand-primary !important; color: #fff !important; }
+.navbar-default .nav > li.open > a { background: $nav-hover !important; color: #fff !important; }
+.navbar-default .nav > li.active > a { background: $brand-primary !important; color: #fff !important; }
 
 .nav > li:hover > a,
 .nav > li:focus > a { background: transparent; }
@@ -496,7 +498,9 @@ footer {
 
 .navbar-nav .dropdown-menu > li > a { text-align: center; padding: 5px 10px; }
 .navbar-nav .dropdown-menu > li > a:hover,
-.navbar-nav .dropdown-menu > li > a:focus { background: $brand-primary; color: #fff; }
+.navbar-nav .dropdown-menu > li > a:focus { background: $nav-hover; color: #fff; }
+.navbar-nav .dropdown-menu > li.active > a:hover,
+.navbar-nav .dropdown-menu > li.active > a:focus { background: $brand-primary; color: #fff; }
 
 .navbar-fixed-top .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
@@ -542,14 +546,14 @@ footer {
  line-height: 75px; font-size: 22px;
  text-align: center; margin: 0 auto;
  color: $brand-primary;
- @include transition(all .2s ease-in-out);
+ @include transition(transform .2s ease-in-out);
  }
 .menu-toggle:hover .fa { color: darken( $brand-primary, 15%); }
 .active .menu-toggle .fa { color: #fff; }
 .open .menu-toggle .fa { color: #fff; transform: rotate(180deg);}
 
-.navbar-default .nav > li.active > .menu-toggle,
-.navbar-default .nav > li.open > .menu-toggle { background: $brand-primary !important; color: #fff !important; }
+.navbar-default .nav > li.open > .menu-toggle { background: $nav-hover !important; color: #fff !important; }
+.navbar-default .nav > li.active > .menu-toggle { background: $brand-primary !important; color: #fff !important; }
 .scrolled.bg-dark-image .navbar-nav > li.active  > a,
 .scrolled.bg-dark-image .navbar-nav > li.open  > a { color: #fff !important; }
 
