@@ -1,21 +1,5 @@
+import formatDate from 'utils/formatDate';
 import InPlaceEditingPlaceholder from 'Components/InPlaceEditingPlaceholder';
-import twoDigitNumber from 'utils/twoDigitNumber';
-
-function formatDate(date) {
-  if (!date) {
-    return (
-      <InPlaceEditingPlaceholder>
-        Select a date in the event page properties.
-      </InPlaceEditingPlaceholder>
-    );
-  }
-
-  const month = date.getMonth() + 1; // getMonth return 0 to 11.
-  const dayOfMonth = date.getDate(); // getDate returns 1 to 31.
-  const year = date.getFullYear(); // getFullYear returns values like 1999 or 2017.
-
-  return `${twoDigitNumber(month)}/${twoDigitNumber(dayOfMonth)}/${year}`;
-}
 
 Scrivito.provideComponent('Event', ({ page }) =>
   <div>
@@ -25,7 +9,7 @@ Scrivito.provideComponent('Event', ({ page }) =>
         <h2 className="h4">
           <i className="fa fa-calendar fa-lg" aria-hidden="true" title="date" />
           { ' ' }
-          { formatDate(page.get('date')) }
+          <EventDate date={ page.get('date') } />
           { ' ' }
           <i className="fa fa-map-marker fa-lg" aria-hidden="true" title="location" />
           { ' ' }
@@ -36,3 +20,15 @@ Scrivito.provideComponent('Event', ({ page }) =>
     <Scrivito.ContentTag tag="div" content={ page } attribute="body" />
   </div>
 );
+
+function EventDate({ date }) {
+  if (!date) {
+    return (
+      <InPlaceEditingPlaceholder>
+        Select a date in the event page properties.
+      </InPlaceEditingPlaceholder>
+    );
+  }
+
+  return formatDate(date, 'MM/DD/YYYY');
+}

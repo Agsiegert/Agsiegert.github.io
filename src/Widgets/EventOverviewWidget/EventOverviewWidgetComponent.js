@@ -1,7 +1,7 @@
 import Event from 'Objs/Event/EventObjClass';
 import InPlaceEditingPlaceholder from 'Components/InPlaceEditingPlaceholder';
 import TagList from 'Components/TagList';
-import twoDigitNumber from 'utils/twoDigitNumber';
+import formatDate from 'utils/formatDate';
 
 class EventOverviewWidgetComponent extends React.Component {
   constructor(props) {
@@ -82,7 +82,7 @@ const EventItem = Scrivito.connect(({ event }) =>
         }
       >
         <span className="box-date">
-          { formatDate(event.get('date')) }
+          { formatDate(event.get('date'), 'MM/DD') }
         </span>
         <span className="box-topic dark-background">
           <h3 className="h3">{ event.get('title') }</h3>
@@ -99,12 +99,3 @@ const EventItem = Scrivito.connect(({ event }) =>
     </Scrivito.LinkTag>
   </div>
 );
-
-function formatDate(date) {
-  if (!date) { return null; }
-
-  const month = date.getMonth() + 1; // getMonth return 0 to 11.
-  const dayOfMonth = date.getDate(); // getDate returns 1 to 31.
-
-  return `${twoDigitNumber(month)}/${twoDigitNumber(dayOfMonth)}`;
-}
