@@ -24,23 +24,23 @@ Scrivito.provideEditingConfig('Event', {
       description: 'E.g. New York Convention Center',
     },
     locationStreetAddress: {
-      title: 'Location street address',
+      title: 'Street address',
       description: 'E.g. 655 W. 34th Street',
     },
     locationLocality: {
-      title: 'Location locality',
+      title: 'Locality',
       description: 'E.g. New York',
     },
     locationRegion: {
-      title: 'Location region',
+      title: 'Region',
       description: 'E.g. NY or CA',
     },
     locationPostalCode: {
-      title: 'Location postal code',
+      title: 'Postal code',
       description: 'E.g. 10001',
     },
     locationCountry: {
-      title: 'Location country',
+      title: 'Country',
       description: 'E.g. USA',
     },
     title: {

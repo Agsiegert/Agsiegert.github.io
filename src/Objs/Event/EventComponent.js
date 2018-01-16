@@ -36,6 +36,39 @@ function EventDate({ date }) {
 }
 
 const EventLocation = Scrivito.connect(({ event }) => {
+  if (Scrivito.isInPlaceEditingActive()) {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <td>Location name:</td>
+            <Scrivito.ContentTag tag="td" content={ event } attribute="locationName" />
+          </tr>
+          <tr>
+            <td>Street address:</td>
+            <Scrivito.ContentTag tag="td" content={ event } attribute="locationStreetAddress" />
+          </tr>
+          <tr>
+            <td>Locality:</td>
+            <Scrivito.ContentTag tag="td" content={ event } attribute="locationLocality" />
+          </tr>
+          <tr>
+            <td>Region:</td>
+            <Scrivito.ContentTag tag="td" content={ event } attribute="locationRegion" />
+          </tr>
+          <tr>
+            <td>Postal code:</td>
+            <Scrivito.ContentTag tag="td" content={ event } attribute="locationPostalCode" />
+          </tr>
+          <tr>
+            <td>Country:</td>
+            <Scrivito.ContentTag tag="td" content={ event } attribute="locationCountry" />
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+
   const locality = event.get('locationLocality');
   const region = event.get('locationRegion');
   const postalCode = event.get('locationPostalCode');
