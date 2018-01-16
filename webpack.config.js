@@ -36,7 +36,7 @@ module.exports = (env = {}) => {
     new CleanWebpackPlugin([buildPath], { verbose: false }),
     new CopyWebpackPlugin([
       { from: '../public' },
-      { from: '../vendor/scrivito', to: 'scrivito' },
+      { from: '../node_modules/scrivito/scrivito/index.html', to: 'scrivito/index.html' },
     ]),
     new ExtractTextPlugin({
       filename: '[name]',
