@@ -15,6 +15,7 @@ function formatDate(date, format) {
     case 'MM/DD': return `${MM}/${DD}`;
     case 'MMMM YYYY': return `${MMMM} ${YYYY}`;
     case 'YYYY-MM': return `${YYYY}-${MM}`;
+    case 'YYYY-MM-DD': return `${YYYY}-${MM}-${DD}`;
   }
 
   throw `formatDate with format "${format}" is not supported!`;
