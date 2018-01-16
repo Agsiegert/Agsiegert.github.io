@@ -1,6 +1,7 @@
 {
   "name": "scrivito",
-  "version": "0.0.1",
+  "license": "LGPL-3.0",
+  "version": "0.1.0-beta",
   "dependencies": {
     "bluebird": "^3.4.7",
     "prop-types": "^15.6.0",

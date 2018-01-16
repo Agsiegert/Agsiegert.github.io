@@ -4435,9 +4435,19 @@ var ObjClass = function (_AttributeContentClas) {
         }, []);
       }
 
-      return ObjClass.all().filter(function (objClass) {
-        return !objClass.isHiddenInSelectionDialogs() && !objClass.isBinary();
-      });
+      return ObjClass.all().filter(isValidPageClass);
+    }
+  }, {
+    key: 'isValidPageClassName',
+    value: function isValidPageClassName(objClassName) {
+      if ((0, _use_rails_engine.useRailsEngine)()) {
+        throw new _errors.InternalError('Unexpected call of isValidPageClassName in rails mode');
+      }
+      var objClass = ObjClass.find(objClassName);
+      if (!objClass) {
+        return false;
+      }
+      return isValidPageClass(objClass);
     }
   }]);
 
@@ -4445,6 +4455,11 @@ var ObjClass = function (_AttributeContentClas) {
 }(_attribute_content_class2.default);
 
 exports.default = ObjClass;
+
+
+function isValidPageClass(objClass) {
+  return !objClass.isHiddenInSelectionDialogs() && !objClass.isBinary();
+}
 
 /***/ }),
 /* 34 */
@@ -7923,24 +7938,28 @@ window.scrivito.client = {};
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.loadCss = loadCss;
+exports.loadJs = loadJs;
 function loadCss(url) {
-  var link = document.createElement('link');
+  var targetDocument = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.document;
+
+  var link = targetDocument.createElement('link');
 
   link.rel = 'stylesheet';
   link.href = url;
 
-  document.head.appendChild(link);
+  targetDocument.head.appendChild(link);
 }
 
 function loadJs(url) {
-  var script = document.createElement('script');
+  var targetDocument = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.document;
+
+  var script = targetDocument.createElement('script');
+
   script.src = url;
 
-  document.head.appendChild(script);
+  targetDocument.head.appendChild(script);
 }
-
-exports.loadCss = loadCss;
-exports.loadJs = loadJs;
 
 /***/ }),
 /* 73 */
@@ -7971,16 +7990,22 @@ var _connect_to_ui2 = _interopRequireDefault(_connect_to_ui);
 
 var _scrivito_sdk = __webpack_require__(138);
 
+var _load_editing_assets = __webpack_require__(173);
+
+var _load_editing_assets2 = _interopRequireDefault(_load_editing_assets);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ui = (0, _connect_to_ui2.default)(); /*
-                                          * This is the webpack entry file used by the NPM module
-                                          */
+/*
+ * This is the webpack entry file used by the NPM module
+ */
+
+var ui = (0, _connect_to_ui2.default)();
 
 (0, _scrivito_sdk.initializeSdk)(ui);
 
 if (ui) {
-  (0, _scrivito_sdk.loadEditing)();
+  (0, _load_editing_assets2.default)();
 }
 
 /***/ }),
@@ -13440,7 +13465,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.initializeSdk = initializeSdk;
-exports.loadEditing = loadEditing;
 
 __webpack_require__(139);
 
@@ -13450,15 +13474,9 @@ __webpack_require__(161);
 
 __webpack_require__(169);
 
-var _scrivito_version = __webpack_require__(172);
-
-var _scrivito_version2 = _interopRequireDefault(_scrivito_version);
-
-var _open_content_browser = __webpack_require__(173);
+var _open_content_browser = __webpack_require__(172);
 
 var _open_content_browser2 = _interopRequireDefault(_open_content_browser);
-
-var _asset_loading = __webpack_require__(72);
 
 var _editor_registry = __webpack_require__(68);
 
@@ -13473,7 +13491,7 @@ window.scrivito.openContentBrowser = _open_content_browser2.default;
 
 function initializeSdk(ui) {
   if (ui) {
-    ui.setAppAdapter(_scrivito_version2.default, scrivito.AppAdapter);
+    ui.setAppAdapter("0.1.0-beta", scrivito.AppAdapter);
     scrivito.uiAdapter = ui.uiAdapter();
   }
 
@@ -13482,11 +13500,6 @@ function initializeSdk(ui) {
   document.addEventListener('DOMContentLoaded', function () {
     return scrivito.BrowserLocation.init();
   });
-}
-
-function loadEditing() {
-  (0, _asset_loading.loadCss)('/scrivito/scrivito_editing.css');
-  (0, _asset_loading.loadJs)('/scrivito/scrivito_editing.js');
 }
 
 /***/ }),
@@ -14105,10 +14118,7 @@ function fetch(verificatorId, verificatorUrl) {
     deferred = new _deferred2.default();
     registry[verificatorId] = deferred;
 
-    (0, _asset_loading.loadJs)(verificatorUrl, function (e) {
-      deferred.reject(e);
-      delete registry[verificatorId];
-    });
+    (0, _asset_loading.loadJs)(verificatorUrl);
   }
 
   return deferred.promise;
@@ -15910,16 +15920,6 @@ if (!window.scrivito) {
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = '0.1.0-beta';
-
-
-/***/ }),
-/* 173 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -15938,6 +15938,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function openContentBrowser(options) {
   return scrivito.uiAdapter.openContentBrowser((0, _ui_adapter_compatible_value2.default)((0, _underscore.extend)({}, (0, _configure_content_browser.getContentBrowserConfiguration)(), (0, _underscore.pick)(options, 'selection', 'selectionMode'))));
+}
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = loadEditingAssets;
+exports.setAssetUrlBase = setAssetUrlBase;
+
+var _asset_loading = __webpack_require__(72);
+
+var assetUrlBase = "https://assets.scrivito.com/sjs/0.1.0-beta";
+
+function loadEditingAssets(targetDocument) {
+  (0, _asset_loading.loadCss)(assetUrlBase + '/scrivito_editing.css', targetDocument);
+  (0, _asset_loading.loadJs)(assetUrlBase + '/scrivito_editing.js', targetDocument);
+}
+
+// For test purpose only.
+function setAssetUrlBase(url) {
+  assetUrlBase = url;
 }
 
 /***/ })
