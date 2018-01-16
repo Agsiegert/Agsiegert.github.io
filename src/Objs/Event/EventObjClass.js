@@ -6,7 +6,12 @@ const Event = Scrivito.provideObjClass('Event', {
     body: ['widgetlist', { only: 'SectionWidget' }],
     date: 'date',
     image: 'reference',
-    location: 'string',
+    locationName: 'string',
+    locationStreetAddress: 'string',
+    locationLocality: 'string',
+    locationPostalCode: 'string',
+    locationRegion: 'string',
+    locationCountry: 'string',
     title: 'string',
     tags: 'stringlist',
     ...metaDataAttributes,
@@ -14,7 +19,9 @@ const Event = Scrivito.provideObjClass('Event', {
 });
 
 registerTextExtract('Event', [
-  { attribute: 'location', type: 'string' },
+  { attribute: 'locationName', type: 'string' },
+  { attribute: 'locationLocality', type: 'string' },
+  { attribute: 'locationCountry', type: 'string' },
   { attribute: 'body', type: 'widgetlist' },
 ]);
 

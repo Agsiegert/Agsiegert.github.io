@@ -10,11 +10,13 @@ Scrivito.provideComponent('Event', ({ page }) =>
           <i className="fa fa-calendar fa-lg" aria-hidden="true" title="date" />
           { ' ' }
           <EventDate date={ page.get('date') } />
-          { ' ' }
+        </h2>
+        <h2 className="h4">
           <i className="fa fa-map-marker fa-lg" aria-hidden="true" title="location" />
           { ' ' }
-          <Scrivito.ContentTag tag="span" content={ page } attribute="location" />
+          Location
         </h2>
+        <EventLocation event={ page } />
       </div>
     </section>
     <Scrivito.ContentTag tag="div" content={ page } attribute="body" />
@@ -32,3 +34,23 @@ function EventDate({ date }) {
 
   return formatDate(date, 'MM/DD/YYYY');
 }
+
+const EventLocation = Scrivito.connect(({ event }) => {
+  const locality = event.get('locationLocality');
+  const region = event.get('locationRegion');
+  const postalCode = event.get('locationPostalCode');
+  const localityRegionPostalCode = [locality, region, postalCode].filter(n => n).join(' ');
+
+  const address = [
+    event.get('locationName'),
+    event.get('locationStreetAddress'),
+    localityRegionPostalCode,
+    event.get('locationCountry'),
+  ].filter(n => n);
+
+  return (
+    <div>
+      { address.map((line, index) => <span key={ index }>{ line } <br /></span>) }
+    </div>
+  );
+});

@@ -86,16 +86,27 @@ const EventItem = Scrivito.connect(({ event }) =>
         </span>
         <span className="box-topic dark-background">
           <h3 className="h3">{ event.get('title') }</h3>
-          <span>
-            <i
-              className={ `fa ${event.get('location') ? 'fa-map-marker' : ''} fa-2x` }
-              aria-hidden="true"
-              title="location"
-            />
-            <span>{ event.get('location') }</span>
-          </span>
+          <EventShortLocation event={ event } />
         </span>
       </Scrivito.BackgroundImageTag>
     </Scrivito.LinkTag>
   </div>
 );
+
+const EventShortLocation = Scrivito.connect(({ event }) => {
+  const location = [
+    event.get('locationName'),
+    event.get('locationLocality'),
+  ].filter(n => n).join(', ');
+
+  return (
+    <span>
+      <i
+        className={ `fa ${location ? 'fa-map-marker' : ''} fa-2x` }
+        aria-hidden="true"
+        title="location"
+      />
+      <span>{ location }</span>
+    </span>
+  );
+});
