@@ -72,7 +72,10 @@ module.exports = (env = {}) => {
       rules: [
         {
           test: /\.js$/,
-          include: path.join(__dirname, 'src'),
+          include: [
+            path.join(__dirname, 'src'),
+            path.join(__dirname, 'node_modules/striptags'),
+          ],
           use: [
             {
               loader: 'babel-loader',
