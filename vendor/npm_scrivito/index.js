@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("underscore"), require("react"), require("react-dom"), require("urijs"), require("prop-types"), require("tcomb-validation"), require("speakingurl"), require("bluebird"));
+		module.exports = factory(require("underscore"), require("react"), require("react-dom"), require("urijs"), require("prop-types"), require("tcomb-validation"), require("speakingurl"));
 	else if(typeof define === 'function' && define.amd)
-		define(["underscore", "react", "react-dom", "urijs", "prop-types", "tcomb-validation", "speakingurl", "bluebird"], factory);
+		define(["underscore", "react", "react-dom", "urijs", "prop-types", "tcomb-validation", "speakingurl"], factory);
 	else if(typeof exports === 'object')
-		exports["scrivito"] = factory(require("underscore"), require("react"), require("react-dom"), require("urijs"), require("prop-types"), require("tcomb-validation"), require("speakingurl"), require("bluebird"));
+		exports["scrivito"] = factory(require("underscore"), require("react"), require("react-dom"), require("urijs"), require("prop-types"), require("tcomb-validation"), require("speakingurl"));
 	else
-		root["scrivito"] = factory(root["underscore"], root["react"], root["react-dom"], root["urijs"], root["prop-types"], root["tcomb-validation"], root["speakingurl"], root["bluebird"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_21__, __WEBPACK_EXTERNAL_MODULE_23__, __WEBPACK_EXTERNAL_MODULE_63__, __WEBPACK_EXTERNAL_MODULE_70__, __WEBPACK_EXTERNAL_MODULE_74__, __WEBPACK_EXTERNAL_MODULE_146__) {
+		root["scrivito"] = factory(root["underscore"], root["react"], root["react-dom"], root["urijs"], root["prop-types"], root["tcomb-validation"], root["speakingurl"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_21__, __WEBPACK_EXTERNAL_MODULE_23__, __WEBPACK_EXTERNAL_MODULE_63__, __WEBPACK_EXTERNAL_MODULE_70__, __WEBPACK_EXTERNAL_MODULE_74__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -1636,8 +1636,9 @@ var LoadableData = /** @class */ (function () {
             return;
         }
         var loadId = loadIdCounter++;
+        var isUnchanged = function () { return _this.value.getLoading() === loadId; };
         var ifUnchanged = function (fn) {
-            if (_this.value.getLoading() === loadId) {
+            if (isUnchanged()) {
                 fn();
             }
         };
@@ -1645,7 +1646,11 @@ var LoadableData = /** @class */ (function () {
         var pushCallbacks = [];
         var addPushCallback = function (callback) { return pushCallbacks.push(callback); };
         var runPushCallbacks = function () { return pushCallbacks.forEach(function (callback) { return callback(); }); };
-        this.loader(addPushCallback).then(function (result) {
+        this.loader({
+            push: addPushCallback,
+            isReload: function () { return _this.hasBeenInvalidated(); },
+            wasCancelled: function () { return !isUnchanged(); },
+        }).then(function (result) {
             return ifUnchanged(function () {
                 return scrivito.batchedStateUpdater.add(function () {
                     _this.value.transitionToAvailable(result, versionWhenLoadingStarted);
@@ -1679,6 +1684,9 @@ var LoadableData = /** @class */ (function () {
     };
     LoadableData.prototype.hasBeenInvalidated = function () {
         if (!this.invalidation) {
+            return false;
+        }
+        if (this.isMissing()) {
             return false;
         }
         return this.currentVersion() !== this.value.version();
@@ -3236,25 +3244,28 @@ var BinaryType = exports.BinaryType = _tcomb.tcomb.irreducible('Binary', functio
 
 "use strict";
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Deferred = function Deferred() {
-  var _this = this;
-
-  _classCallCheck(this, Deferred);
-
-  this.promise = new scrivito.Promise(function (resolveFn, rejectFn) {
-    _this.resolve = resolveFn;
-    _this.reject = rejectFn;
-  });
-};
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var Deferred = /** @class */ (function () {
+    function Deferred() {
+        var _this = this;
+        this.promise = new scrivito.Promise(function (resolveFn, rejectFn) {
+            _this.resolve = function (value) {
+                _this.settled = true;
+                resolveFn(value);
+            };
+            _this.reject = function (error) {
+                _this.settled = true;
+                rejectFn(error);
+            };
+        });
+    }
+    Deferred.prototype.isPending = function () {
+        return !this.settled;
+    };
+    return Deferred;
+}());
 exports.default = Deferred;
+
 
 /***/ }),
 /* 20 */
@@ -7103,7 +7114,7 @@ var _connect_to_ui2 = _interopRequireDefault(_connect_to_ui);
 
 var _scrivito_sdk = __webpack_require__(128);
 
-var _load_editing_assets = __webpack_require__(163);
+var _load_editing_assets = __webpack_require__(167);
 
 var _load_editing_assets2 = _interopRequireDefault(_load_editing_assets);
 
@@ -7738,7 +7749,9 @@ var ObjData = function () {
 
     this._loadableData = new _loadable_data2.default({
       state: state,
-      loader: function loader(push) {
+      loader: function loader(_ref) {
+        var push = _ref.push;
+
         return ObjRetrieval.retrieveObj(_this._id).then(function (data) {
           push(function () {
             return _this._replication().notifyBackendState(data);
@@ -7838,7 +7851,7 @@ exports.reset = reset;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var deferred_es6_1 = __webpack_require__(19);
+var deferred_1 = __webpack_require__(19);
 var underscore_1 = __webpack_require__(0);
 var BatchRetrieval = /** @class */ (function () {
     function BatchRetrieval(mget, _a) {
@@ -7853,7 +7866,7 @@ var BatchRetrieval = /** @class */ (function () {
             scrivito.nextTick(function () { return _this.performRetrieval(); });
         }
         if (!this.deferreds[id]) {
-            var deferred = new deferred_es6_1.default();
+            var deferred = new deferred_1.default();
             this.deferreds[id] = deferred;
         }
         return this.deferreds[id].promise;
@@ -8661,27 +8674,43 @@ var ObjIdQueryBatch = function () {
   }, {
     key: '_data',
     value: function _data() {
-      var _this = this;
-
       return new _loadable_data2.default({
         state: stateContainer(this._params, this._index),
-        loader: function loader() {
-          return _this._load();
-        },
+        loader: this._load.bind(this),
         invalidation: invalidationFn(this._continuation)
       });
     }
   }, {
     key: '_load',
-    value: function _load() {
-      var _this2 = this;
+    value: function _load(_ref) {
+      var _this = this;
+
+      var push = _ref.push,
+          isReload = _ref.isReload,
+          wasCancelled = _ref.wasCancelled;
 
       return this._fetchContinuation().then(function (continuation) {
-        var batchSpecificParams = { size: _this2._batchSize, continuation: continuation };
+        if (wasCancelled()) {
+          return;
+        }
 
-        var requestParams = (0, _underscore.extend)({}, _this2._params, batchSpecificParams);
+        var batchSpecificParams = {
+          size: _this._batchSize,
+          continuation: continuation,
+          include_objs: !isReload()
+        };
+
+        var requestParams = (0, _underscore.extend)({}, _this._params, batchSpecificParams);
 
         return ObjQueryRetrieval.retrieve(requestParams).then(function (response) {
+          if (response.objs) {
+            push(function () {
+              return response.objs.forEach(function (objJson) {
+                return ObjDataStore.store(objJson);
+              });
+            });
+          }
+
           preloadObjData(response.results);
 
           return response;
@@ -8691,11 +8720,11 @@ var ObjIdQueryBatch = function () {
   }, {
     key: '_fetchContinuation',
     value: function _fetchContinuation() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (this._previousBatch) {
         return (0, _load3.default)(function () {
-          return _this3._previousBatch.continuationForNextBatch();
+          return _this2._previousBatch.continuationForNextBatch();
         });
       }
 
@@ -8771,7 +8800,7 @@ function retrieve(params) {
   var consistentParams = _underscore2.default.extend({ consistent: true }, params);
   return scrivito.CmsRestApi.get('workspaces/' + workspaceId + '/objs/search', consistentParams).then(function (response) {
     response.results = _underscore2.default.pluck(response.results, 'id');
-    return _underscore2.default.pick(response, 'results', 'continuation', 'total');
+    return _underscore2.default.pick(response, 'results', 'continuation', 'total', 'objs');
   });
 }
 
@@ -12386,13 +12415,13 @@ exports.initializeSdk = initializeSdk;
 
 __webpack_require__(129);
 
-__webpack_require__(150);
+__webpack_require__(154);
 
-__webpack_require__(151);
+__webpack_require__(155);
 
-__webpack_require__(159);
+__webpack_require__(163);
 
-var _open_content_browser = __webpack_require__(162);
+var _open_content_browser = __webpack_require__(166);
 
 var _open_content_browser2 = _interopRequireDefault(_open_content_browser);
 
@@ -12459,11 +12488,11 @@ __webpack_require__(144);
 
 __webpack_require__(145);
 
-__webpack_require__(147);
+__webpack_require__(151);
 
-__webpack_require__(148);
+__webpack_require__(152);
 
-__webpack_require__(149);
+__webpack_require__(153);
 
 /***/ }),
 /* 130 */
@@ -12929,17 +12958,22 @@ function perform(callback) {
 // It is about to return any authorization, and have not more than one
 // computation at any time.
 function computeVerification(verificator, data) {
-  // isPending() is Bluebird
-  if (!(computation && computation.isPending())) {
-    computation = _verificator_functions2.default.fetch(verificator.id, verificator.url).then(function (computeAuthorization) {
-      return new scrivito.Promise(function (r) {
-        return computeAuthorization(data, r);
-      });
+  if (!computation || !computation.pending) {
+    computation = {
+      promise: _verificator_functions2.default.fetch(verificator.id, verificator.url).then(function (computeAuthorization) {
+        return new scrivito.Promise(function (r) {
+          return computeAuthorization(data, r);
+        });
+      }),
+      challenge: { verificator: verificator, data: data },
+      pending: true
+    };
+
+    computation.promise.then(forgetComputationAndRememberVerification, function () {
+      computation.pending = false;
     });
-    computation.then(forgetComputationAndRememberVerification);
-    computation.challenge = { verificator: verificator, data: data };
   }
-  return computation;
+  return computation.promise;
 }
 
 function forgetComputationAndRememberVerification(verificationToRemember) {
@@ -12977,7 +13011,7 @@ function currentState() {
   var verificator = challenge.verificator;
   var verificatorId = verificator.id;
   var data = challenge.data;
-  if (computation.isPending()) {
+  if (computation.pending) {
     return 'Pending computation: ' + verificatorId + ' with ' + data;
   }
 
@@ -13817,66 +13851,711 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 "use strict";
 
 
-var _underscore = __webpack_require__(0);
+var _promisePolyfill = __webpack_require__(146);
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
-var _bluebird = __webpack_require__(146);
-
-var _bluebird2 = _interopRequireDefault(_bluebird);
+var _promisePolyfill2 = _interopRequireDefault(_promisePolyfill);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(function () {
-  _bluebird2.default.noConflict();
-
-  _bluebird2.default.config({
-    warnings: false,
-    longStackTraces: false
-  });
-
-  _underscore2.default.extend(scrivito, {
-    Promise: _bluebird2.default,
-
-    promise: {
-      enableDebugMode: function enableDebugMode() {
-        _bluebird2.default.config({
-          warnings: true,
-          longStackTraces: true
-        });
-      },
-      wrapInJqueryDeferred: function wrapInJqueryDeferred(promise, jQueryDeferred) {
-        var d = jQueryDeferred;
-
-        promise.then(function (data) {
-          return d.resolve(data);
-        }, function (error) {
-          d.reject(error);
-        });
-
-        return d;
-      },
-      always: function always(promise, callback) {
-        promise.then(callback, callback);
-        return promise;
-      },
-      capturePromises: function capturePromises() {
-        _bluebird2.default.setScheduler(function (promiseCallback) {
-          scrivito.nextTick(promiseCallback);
-        });
-      }
-    }
-  });
-})();
+// Scrivito uses the browser's native `Promise` implementation by default (or a polyfill).
+//
+// The promise implementation can be switched for unit testing purposes,
+// see: `enableSyncPromiseSettlement`.
+scrivito.Promise = window.Promise || _promisePolyfill2.default;
 
 /***/ }),
 /* 146 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_146__;
+"use strict";
+/* WEBPACK VAR INJECTION */(function(setImmediate) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+// Store setTimeout reference so promise-polyfill will be unaffected by
+// other code modifying setTimeout (like sinon.useFakeTimers())
+var setTimeoutFunc = setTimeout;
+
+function noop() {}
+
+// Polyfill for Function.prototype.bind
+function bind(fn, thisArg) {
+  return function () {
+    fn.apply(thisArg, arguments);
+  };
+}
+
+function handle(self, deferred) {
+  while (self._state === 3) {
+    self = self._value;
+  }
+  if (self._state === 0) {
+    self._deferreds.push(deferred);
+    return;
+  }
+  self._handled = true;
+  Promise._immediateFn(function () {
+    var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+    if (cb === null) {
+      (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
+      return;
+    }
+    var ret;
+    try {
+      ret = cb(self._value);
+    } catch (e) {
+      reject(deferred.promise, e);
+      return;
+    }
+    resolve(deferred.promise, ret);
+  });
+}
+
+function resolve(self, newValue) {
+  try {
+    // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+    if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
+    if (newValue && ((typeof newValue === 'undefined' ? 'undefined' : _typeof(newValue)) === 'object' || typeof newValue === 'function')) {
+      var then = newValue.then;
+      if (newValue instanceof Promise) {
+        self._state = 3;
+        self._value = newValue;
+        finale(self);
+        return;
+      } else if (typeof then === 'function') {
+        doResolve(bind(then, newValue), self);
+        return;
+      }
+    }
+    self._state = 1;
+    self._value = newValue;
+    finale(self);
+  } catch (e) {
+    reject(self, e);
+  }
+}
+
+function reject(self, newValue) {
+  self._state = 2;
+  self._value = newValue;
+  finale(self);
+}
+
+function finale(self) {
+  if (self._state === 2 && self._deferreds.length === 0) {
+    Promise._immediateFn(function () {
+      if (!self._handled) {
+        Promise._unhandledRejectionFn(self._value);
+      }
+    });
+  }
+
+  for (var i = 0, len = self._deferreds.length; i < len; i++) {
+    handle(self, self._deferreds[i]);
+  }
+  self._deferreds = null;
+}
+
+function Handler(onFulfilled, onRejected, promise) {
+  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+  this.onRejected = typeof onRejected === 'function' ? onRejected : null;
+  this.promise = promise;
+}
+
+/**
+ * Take a potentially misbehaving resolver function and make sure
+ * onFulfilled and onRejected are only called once.
+ *
+ * Makes no guarantees about asynchrony.
+ */
+function doResolve(fn, self) {
+  var done = false;
+  try {
+    fn(function (value) {
+      if (done) return;
+      done = true;
+      resolve(self, value);
+    }, function (reason) {
+      if (done) return;
+      done = true;
+      reject(self, reason);
+    });
+  } catch (ex) {
+    if (done) return;
+    done = true;
+    reject(self, ex);
+  }
+}
+
+function Promise(fn) {
+  if (!(this instanceof Promise)) throw new TypeError('Promises must be constructed via new');
+  if (typeof fn !== 'function') throw new TypeError('not a function');
+  this._state = 0;
+  this._handled = false;
+  this._value = undefined;
+  this._deferreds = [];
+
+  doResolve(fn, this);
+}
+
+var _proto = Promise.prototype;
+_proto.catch = function (onRejected) {
+  return this.then(null, onRejected);
+};
+
+_proto.then = function (onFulfilled, onRejected) {
+  var prom = new this.constructor(noop);
+
+  handle(this, new Handler(onFulfilled, onRejected, prom));
+  return prom;
+};
+
+Promise.all = function (arr) {
+  return new Promise(function (resolve, reject) {
+    if (!arr || typeof arr.length === 'undefined') throw new TypeError('Promise.all accepts an array');
+    var args = Array.prototype.slice.call(arr);
+    if (args.length === 0) return resolve([]);
+    var remaining = args.length;
+
+    function res(i, val) {
+      try {
+        if (val && ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' || typeof val === 'function')) {
+          var then = val.then;
+          if (typeof then === 'function') {
+            then.call(val, function (val) {
+              res(i, val);
+            }, reject);
+            return;
+          }
+        }
+        args[i] = val;
+        if (--remaining === 0) {
+          resolve(args);
+        }
+      } catch (ex) {
+        reject(ex);
+      }
+    }
+
+    for (var i = 0; i < args.length; i++) {
+      res(i, args[i]);
+    }
+  });
+};
+
+Promise.resolve = function (value) {
+  if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value.constructor === Promise) {
+    return value;
+  }
+
+  return new Promise(function (resolve) {
+    resolve(value);
+  });
+};
+
+Promise.reject = function (value) {
+  return new Promise(function (resolve, reject) {
+    reject(value);
+  });
+};
+
+Promise.race = function (values) {
+  return new Promise(function (resolve, reject) {
+    for (var i = 0, len = values.length; i < len; i++) {
+      values[i].then(resolve, reject);
+    }
+  });
+};
+
+// Use polyfill for setImmediate for performance gains
+Promise._immediateFn = typeof setImmediate === 'function' && function (fn) {
+  setImmediate(fn);
+} || function (fn) {
+  setTimeoutFunc(fn, 0);
+};
+
+Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
+  if (typeof console !== 'undefined' && console) {
+    console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+  }
+};
+
+exports.default = Promise;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(147).setImmediate))
 
 /***/ }),
 /* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function () {
+  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+};
+exports.setInterval = function () {
+  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+};
+exports.clearTimeout = exports.clearInterval = function (timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function () {};
+Timeout.prototype.close = function () {
+  this._clearFn.call(window, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function (item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function (item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function (item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout) item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(148);
+exports.setImmediate = setImmediate;
+exports.clearImmediate = clearImmediate;
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global, process) {
+
+(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+        // Callback can either be a function or a string
+        if (typeof callback !== "function") {
+            callback = new Function("" + callback);
+        }
+        // Copy function arguments
+        var args = new Array(arguments.length - 1);
+        for (var i = 0; i < args.length; i++) {
+            args[i] = arguments[i + 1];
+        }
+        // Store and register the task
+        var task = { callback: callback, args: args };
+        tasksByHandle[nextHandle] = task;
+        registerImmediate(nextHandle);
+        return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+            case 0:
+                callback();
+                break;
+            case 1:
+                callback(args[0]);
+                break;
+            case 2:
+                callback(args[0], args[1]);
+                break;
+            case 3:
+                callback(args[0], args[1], args[2]);
+                break;
+            default:
+                callback.apply(undefined, args);
+                break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function registerImmediate(handle) {
+            process.nextTick(function () {
+                runIfPresent(handle);
+            });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function () {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function onGlobalMessage(event) {
+            if (event.source === global && typeof event.data === "string" && event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function registerImmediate(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function (event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function registerImmediate(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function registerImmediate(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function registerImmediate(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+})(typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(149), __webpack_require__(150)))
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var g;
+
+// This works in non-strict mode
+g = function () {
+	return this;
+}();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout() {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+})();
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch (e) {
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch (e) {
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e) {
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e) {
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while (len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () {
+    return '/';
+};
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function () {
+    return 0;
+};
+
+/***/ }),
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13933,7 +14612,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })();
 
 /***/ }),
-/* 148 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13961,7 +14640,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 149 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14021,7 +14700,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 150 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14032,28 +14711,28 @@ __webpack_require__(64);
 __webpack_require__(5);
 
 /***/ }),
-/* 151 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(152);
-
-__webpack_require__(153);
-
-__webpack_require__(155);
-
 __webpack_require__(156);
 
 __webpack_require__(157);
 
-__webpack_require__(158);
+__webpack_require__(159);
+
+__webpack_require__(160);
+
+__webpack_require__(161);
+
+__webpack_require__(162);
 
 __webpack_require__(55);
 
 /***/ }),
-/* 152 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14065,7 +14744,7 @@ if (!window.scrivito) {
 window.scrivito.AppSupport = {};
 
 /***/ }),
-/* 153 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14089,7 +14768,7 @@ var _window_context = __webpack_require__(11);
 
 var _mount_component = __webpack_require__(54);
 
-var _resolve_url = __webpack_require__(154);
+var _resolve_url = __webpack_require__(158);
 
 var _resolve_url2 = _interopRequireDefault(_resolve_url);
 
@@ -14298,7 +14977,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 154 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14347,7 +15026,7 @@ function resolveUrl(url) {
 exports.default = resolveUrl;
 
 /***/ }),
-/* 155 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14461,7 +15140,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 156 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14492,7 +15171,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 157 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14636,7 +15315,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 158 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14756,18 +15435,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 })();
 
 /***/ }),
-/* 159 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(160);
+__webpack_require__(164);
 
-__webpack_require__(161);
+__webpack_require__(165);
 
 /***/ }),
-/* 160 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14778,7 +15457,7 @@ if (!window.scrivito) {
 }
 
 /***/ }),
-/* 161 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14833,7 +15512,7 @@ if (!window.scrivito) {
 })();
 
 /***/ }),
-/* 162 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14859,7 +15538,7 @@ function openContentBrowser(options) {
 }
 
 /***/ }),
-/* 163 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
