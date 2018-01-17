@@ -33,7 +33,6 @@ module.exports = (env = {}) => {
       },
     }),
     new InlineEnvironmentVariablesPlugin('SCRIVITO_TENANT'),
-    new CleanWebpackPlugin([buildPath], { verbose: false }),
     new CopyWebpackPlugin([
       { from: '../public' },
       { from: '../node_modules/scrivito/scrivito/index.html', to: 'scrivito/index.html' },
@@ -45,6 +44,7 @@ module.exports = (env = {}) => {
   ];
 
   if (isProduction) {
+    plugins.unshift(new CleanWebpackPlugin([buildPath], { verbose: false }));
     plugins.push(
       new UglifyJSPlugin({
         cache: true,
