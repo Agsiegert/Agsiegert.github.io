@@ -1,6 +1,6 @@
 import formatDate from 'utils/formatDate';
 import InPlaceEditingPlaceholder from 'Components/InPlaceEditingPlaceholder';
-import schemaDotOrgEvent from 'utils/schemaDotOrgEvent';
+import SchemaDotOrg from 'Components/SchemaDotOrg';
 
 Scrivito.provideComponent('Event', ({ page }) =>
   <div>
@@ -16,9 +16,7 @@ Scrivito.provideComponent('Event', ({ page }) =>
       </div>
     </section>
     <Scrivito.ContentTag tag="div" content={ page } attribute="body" />
-    <script type="application/ld+json">
-      { JSON.stringify(schemaDotOrgEvent(page)) }
-    </script>
+    <SchemaDotOrg content={ page } />
   </div>
 );
 

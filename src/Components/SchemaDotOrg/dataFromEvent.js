@@ -2,7 +2,7 @@ import formatDate from 'utils/formatDate';
 import pickBy from 'lodash/pickBy';
 import urlFromBinary from 'utils/urlFromBinary';
 
-function schemaDotOrgEvent(event) {
+function dataFromEvent(event) {
   const data = {
     '@context': 'http://schema.org',
     '@type': 'Event',
@@ -43,4 +43,4 @@ function addressFromEvent(event) {
   return address;
 }
 
-export default schemaDotOrgEvent;
+export default dataFromEvent;
