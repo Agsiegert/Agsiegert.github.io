@@ -1,9 +1,8 @@
 import formatDate from 'utils/formatDate';
-import pickBy from 'lodash/pickBy';
 import urlFromBinary from 'utils/urlFromBinary';
 
 function dataFromEvent(event) {
-  const data = {
+  return {
     '@context': 'http://schema.org',
     '@type': 'Event',
     name: event.get('title'),
@@ -13,21 +12,18 @@ function dataFromEvent(event) {
     image: urlFromBinary(event.get('image')),
     description: event.get('metaDataDescription'),
   };
-
-  return pickBy(data, v => v);
 }
 
 function locationFromEvent(event) {
-  const name = event.get('locationName');
-  const address = addressFromEvent(event);
-
-  if (!name && !address) { return null; }
-
-  return pickBy({ '@type': 'Place', name, address }, v => v);
+  return {
+    '@type': 'Place',
+    name: event.get('locationName'),
+    address: addressFromEvent(event),
+  };
 }
 
 function addressFromEvent(event) {
-  let address = {
+  return {
     '@type': 'PostalAddress',
     streetAddress: event.get('locationStreetAddress'),
     addressLocality: event.get('locationLocality'),
@@ -35,12 +31,6 @@ function addressFromEvent(event) {
     postalCode: event.get('locationPostalCode'),
     addressCountry: event.get('locationCountry'),
   };
-
-  address = pickBy(address, v => v);
-
-  if (Object.keys(address).length === 1) { return null; }
-
-  return address;
 }
 
 export default dataFromEvent;
