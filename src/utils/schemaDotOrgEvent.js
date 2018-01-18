@@ -8,7 +8,7 @@ function schemaDotOrgEvent(event) {
     '@type': 'Event',
     name: event.get('title'),
     url: Scrivito.urlFor(event),
-    startDate: formatDate(event.get('date'), 'YYYY-MM-DD'),
+    startDate: formatDate(event.get('date'), 'yyyy-mm-dd'),
     location: locationFromEvent(event),
     image: urlFromBinary(event.get('image')),
     description: event.get('metaDataDescription'),

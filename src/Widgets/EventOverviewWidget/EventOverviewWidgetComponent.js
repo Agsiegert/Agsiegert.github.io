@@ -82,7 +82,7 @@ const EventItem = Scrivito.connect(({ event }) =>
         }
       >
         <span className="box-date">
-          { formatDate(event.get('date'), 'MM/DD') }
+          { formatDate(event.get('date'), 'mm/dd') }
         </span>
         <span className="box-topic dark-background">
           <h3 className="h3">{ event.get('title') }</h3>

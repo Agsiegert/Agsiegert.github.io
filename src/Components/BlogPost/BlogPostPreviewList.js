@@ -32,8 +32,8 @@ const BlogPostPreviewList = Scrivito.connect(({ maxItems, author, tag }) => {
   const listElements = [];
   posts.forEach(post => {
     const publishedAt = post.get('publishedAt');
-    if (publishedAt && dateHeadline !== formatDate(publishedAt, 'MMMM YYYY')) {
-      dateHeadline = formatDate(publishedAt, 'MMMM YYYY');
+    if (publishedAt && dateHeadline !== formatDate(publishedAt, 'mmmm yyyy')) {
+      dateHeadline = formatDate(publishedAt, 'mmmm yyyy');
       listElements.push(<MonthHeadline date={ publishedAt } key={ publishedAt }/>);
     }
 
@@ -49,8 +49,8 @@ const BlogPostPreviewList = Scrivito.connect(({ maxItems, author, tag }) => {
 
 const MonthHeadline = Scrivito.connect(({ date }) =>
   <li className="timeline-divider">
-    <time dateTime={ formatDate(date, 'YYYY-MM') }>
-      { formatDate(date, 'MMMM YYYY') }
+    <time dateTime={ formatDate(date, 'yyyy-mm') }>
+      { formatDate(date, 'mmmm yyyy') }
     </time>
   </li>
 );
