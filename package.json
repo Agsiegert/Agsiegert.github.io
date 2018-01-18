@@ -48,7 +48,7 @@
     "react-scroll": "^1.7.6",
     "react-slick": "^0.16.0",
     "sass-loader": "^6.0.6",
-    "scrivito": "file:vendor/npm_scrivito",
+    "scrivito": "^0.2.0",
     "slick-carousel": "^1.6.0",
     "striptags": "^3.1.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
@@ -57,11 +57,7 @@
   },
   "scripts": {
     "build": "webpack -p",
-    "start": "webpack-dev-server --open",
-    "scrivito": "npm run scrivito:build && npm run scrivito:copy:npm_package && npm run scrivito:copy:npm_package && npm run scrivito:commit",
-    "scrivito:build": "cd ../rails_connector && bundle && bundle exec rake package:build_js",
-    "scrivito:copy:npm_package": "rm -rf vendor/npm_scrivito && mkdir -p vendor/npm_scrivito && cp -r ../rails_connector/js/build/npm_scrivito vendor",
-    "scrivito:commit": "git add vendor && git commit -m \"[sdk] Updated Scrivito SDK to version `cd ../rails_connector && git describe`\""
+    "start": "webpack-dev-server --open"
   },
   "dependencies": {}
 }
