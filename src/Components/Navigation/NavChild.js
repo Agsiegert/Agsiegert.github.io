@@ -61,7 +61,7 @@ const NavSingleChild = Scrivito.connect(({ child, open, ...otherProps }) => {
       { ...otherProps }
     >
       <Scrivito.LinkTag to={ child }>
-        { child.get('title') }
+        { child.get('title') || '<untitled>' }
       </Scrivito.LinkTag>
     </li>
   );
@@ -81,7 +81,7 @@ const Dropdown = Scrivito.connect(({ child, open, toggleDropdown, ...otherProps 
         aria-haspopup="true"
         aria-expanded={ open }
       >
-        { child.get('title') }
+        { child.get('title') || '<untitled>' }
       </Scrivito.LinkTag>
       <span
         className="menu-toggle"
