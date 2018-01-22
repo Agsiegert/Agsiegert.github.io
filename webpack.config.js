@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InlineEnvironmentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
 
 // load ".env"
 dotenv.config();
@@ -53,6 +54,12 @@ module.exports = (env = {}) => {
           ie8: false,
           ecma: 5,
         },
+      })
+    );
+    plugins.push(
+      new ZipPlugin({
+        path: '../',
+        filename: 'build.zip',
       })
     );
   } else {
