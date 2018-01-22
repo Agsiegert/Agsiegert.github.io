@@ -1,7 +1,7 @@
 import { Link as ScrollLink } from 'react-scroll';
 
-function ScrollToNextSectionLink({ heigthClassName }) {
-  if (heigthClassName !== 'full-height') { return null; }
+function ScrollToNextSectionLink({ heightClassName }) {
+  if (heightClassName !== 'full-height') { return null; }
 
   return (
     <ScrollLink

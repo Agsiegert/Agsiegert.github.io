@@ -60,7 +60,7 @@ class Navigation extends React.Component {
     const {
       navigationStyle,
       backgroundImage,
-      heigthClassName,
+      heightClassName,
       useGradient,
       isLandingPage,
     } = currentPageNavigationOptions();
@@ -104,8 +104,8 @@ class Navigation extends React.Component {
       }
     }
 
-    if (heigthClassName) {
-      topSectionClassNames.push(heigthClassName);
+    if (heightClassName) {
+      topSectionClassNames.push(heightClassName);
     }
 
     return (
@@ -124,8 +124,8 @@ class Navigation extends React.Component {
             navigationStyle={ navigationStyle }
           />
 
-          <NavigationSection heigthClassName={ heigthClassName } />
-          <ScrollToNextSectionLink heigthClassName={ heigthClassName } />
+          <NavigationSection heightClassName={ heightClassName } />
+          <ScrollToNextSectionLink heightClassName={ heightClassName } />
         </Scrivito.BackgroundImageTag>
         <ScrollElement name="nextSection" />
       </React.Fragment>
