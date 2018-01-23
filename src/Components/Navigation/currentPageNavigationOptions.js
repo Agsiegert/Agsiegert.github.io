@@ -15,7 +15,7 @@ function currentPageNavigationOptions() {
   return {
     navigationStyle: 'solidWhite',
     backgroundImage: null,
-    heigthClassName: null,
+    heightClassName: null,
     isLandingPage: false,
     useGradient: false,
   };
@@ -60,8 +60,8 @@ function pageNavigationOptions(obj) {
   const useGradient = backgroundImage && obj.get('navigationBackgroundImageGradient') === 'yes';
 
   const navigationHeight = obj.get('navigationHeight') || 'small';
-  let heigthClassName = null;
-  if (navigationHeight !== 'small') { heigthClassName = navigationHeight; }
+  let heightClassName = null;
+  if (navigationHeight !== 'small') { heightClassName = navigationHeight; }
 
   let navigationStyle = 'solidWhite';
   if (backgroundImage || navigationHeight !== 'small') { navigationStyle = 'transparentDark'; }
@@ -69,7 +69,7 @@ function pageNavigationOptions(obj) {
   return {
     navigationStyle,
     backgroundImage,
-    heigthClassName,
+    heightClassName,
     useGradient,
   };
 }
@@ -84,14 +84,14 @@ function imageWithMediumHeightOrNothing(image) {
     return {
       navigationStyle: 'transparentDark',
       backgroundImage: image,
-      heigthClassName: 'medium-height',
+      heightClassName: 'medium-height',
     };
   }
 
   return {
     navigationStyle: 'solidWhite',
     backgroundImage: null,
-    heigthClassName: null,
+    heightClassName: null,
   };
 }
 
@@ -100,14 +100,14 @@ function imageWithMediumHeightOrMinHeight(image) {
     return {
       navigationStyle: 'transparentDark',
       backgroundImage: image,
-      heigthClassName: 'medium-height',
+      heightClassName: 'medium-height',
     };
   }
 
   return {
     navigationStyle: 'solidWhite',
     backgroundImage: null,
-    heigthClassName: 'min-height',
+    heightClassName: 'min-height',
   };
 }
 
