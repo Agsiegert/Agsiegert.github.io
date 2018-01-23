@@ -8,7 +8,8 @@ function logoObj({ scrolled, navigationStyle }) {
     logoVersion = 'logoDark';
   }
 
-  return Scrivito.Obj.root().get(logoVersion);
+  const root = Scrivito.Obj.root();
+  if (root) { return root.get(logoVersion); }
 }
 
 function Logo({ scrolled, navigationStyle }) {

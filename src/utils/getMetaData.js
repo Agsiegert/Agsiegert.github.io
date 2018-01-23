@@ -20,14 +20,17 @@ function getMetaData(page) {
     meta.push({ name: 'description', content: description });
   }
 
-  const facebookAppId = Scrivito.Obj.root().get('facebookAppId');
-  if (facebookAppId) {
-    meta.push({ property: 'fb:app_id', content: facebookAppId });
-  }
+  const root = Scrivito.Obj.root();
+  if (root) {
+    const facebookAppId = root.get('facebookAppId');
+    if (facebookAppId) {
+      meta.push({ property: 'fb:app_id', content: facebookAppId });
+    }
 
-  const twitterSite = Scrivito.Obj.root().get('twitterSite');
-  if (twitterSite) {
-    meta.push({ name: 'twitter:site', content: twitterSite });
+    const twitterSite = root.get('twitterSite');
+    if (twitterSite) {
+      meta.push({ name: 'twitter:site', content: twitterSite });
+    }
   }
 
   const tcCreator = page.get('tcCreator');
