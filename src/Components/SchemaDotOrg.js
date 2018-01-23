@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import isPlainObject from 'lodash/isPlainObject';
-import mapValues from 'lodash/mapValues';
+import mapValues from 'utils/mapValues';
 import pickBy from 'lodash/pickBy';
 import dataFromEvent from './SchemaDotOrg/dataFromEvent';
 
