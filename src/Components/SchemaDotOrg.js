@@ -21,7 +21,6 @@ function dataFromItem(item) {
 }
 
 function pruneEmptyValues(data) {
-  // prune sub objects
   let prunedData = mapValues(data, subData => {
     if (isPlainObject(subData)) {
       return pruneEmptyValues(subData);
@@ -29,10 +28,8 @@ function pruneEmptyValues(data) {
     return subData;
   });
 
-  // prune empty values
   prunedData = pickBy(prunedData, v => !isEmpty(v));
 
-  // return empty array, if only keys starting with "@" exists
   const keysWithoutAt = Object.keys(prunedData).filter(sd => !sd.startsWith('@'));
   if (keysWithoutAt.length) {
     return prunedData;
