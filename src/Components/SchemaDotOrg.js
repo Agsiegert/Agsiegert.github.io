@@ -1,7 +1,5 @@
 import isEmpty from 'is-empty';
 import isPlainObject from 'lodash/isPlainObject';
-import mapValues from 'utils/mapValues';
-import pickBy from 'utils/pickBy';
 import dataFromEvent from './SchemaDotOrg/dataFromEvent';
 
 const SchemaDotOrg = Scrivito.connect(({ content }) => {
@@ -13,6 +11,14 @@ const SchemaDotOrg = Scrivito.connect(({ content }) => {
     </script>
   );
 });
+
+function dataFromItem(item) {
+  switch (item.objClass()) {
+    case 'Event': return dataFromEvent(item);
+  }
+
+  throw `SchemaDotOrg for objClass ${item.objClass()} not supported!`;
+}
 
 function pruneEmptyValues(data) {
   // prune sub objects
@@ -34,12 +40,23 @@ function pruneEmptyValues(data) {
   return {};
 }
 
-function dataFromItem(item) {
-  switch (item.objClass()) {
-    case 'Event': return dataFromEvent(item);
-  }
+function arrayToObject(array) {
+  return Object.assign(
+    ...array.map(([key, value]) => ({ [key]: value }))
+  );
+}
 
-  throw `SchemaDotOrg for objClass ${item.objClass()} not supported!`;
+function mapValues(data, fn) {
+  return arrayToObject(
+    Object.entries(data)
+      .map(([key, value]) => [key, fn(value)])
+  );
+}
+
+function pickBy(data, fn) {
+  return arrayToObject(
+    Object.entries(data).filter(([_key, value]) => fn(value))
+  );
 }
 
 export default SchemaDotOrg;
