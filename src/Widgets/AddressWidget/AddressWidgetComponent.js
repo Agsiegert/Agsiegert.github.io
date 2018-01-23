@@ -54,13 +54,14 @@ Scrivito.provideComponent('AddressWidget', ({ widget }) => {
 });
 
 const Logo = Scrivito.connect(() => {
-  if (!Scrivito.Obj.root()) { return null; }
+  const root = Scrivito.Obj.root();
+  if (!root) { return null; }
 
-  const logo = Scrivito.Obj.root().get('logoDark');
+  const logo = root.get('logoDark');
   if (!logo) { return null; }
 
   return (
-    <Scrivito.LinkTag to={ Scrivito.Obj.root() }>
+    <Scrivito.LinkTag to={ root }>
       <Scrivito.ImageTag content={ logo } className="logo" alt="Logo" />
     </Scrivito.LinkTag>
   );
