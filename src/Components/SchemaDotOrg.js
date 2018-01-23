@@ -1,7 +1,7 @@
 import isEmpty from 'is-empty';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'utils/mapValues';
-import pickBy from 'lodash/pickBy';
+import pickBy from 'utils/pickBy';
 import dataFromEvent from './SchemaDotOrg/dataFromEvent';
 
 const SchemaDotOrg = Scrivito.connect(({ content }) => {
