@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from 'is-empty';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'utils/mapValues';
 import pickBy from 'lodash/pickBy';
