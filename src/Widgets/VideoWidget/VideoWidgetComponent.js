@@ -5,7 +5,7 @@ Scrivito.provideComponent('VideoWidget', ({ widget }) => {
   const videoUrl = urlFromBinary(widget.get('source'));
 
   if (!videoUrl && !Scrivito.isInPlaceEditingActive()) {
-    return <null />;
+    return null;
   }
 
   const posterUrl = urlFromBinary(widget.get('poster'));
