@@ -90,9 +90,10 @@ module.exports = (env = {}) => {
                 presets: [
                   '@babel/preset-react',
                   ['@babel/preset-env', {
+                    debug: false,
                     modules: false,
                     targets: { browsers: ['last 2 versions', 'ie >= 10'] },
-                    debug: false
+                    useBuiltIns: 'usage',
                   }],
                 ],
                 plugins: ['@babel/plugin-proposal-object-rest-spread'],
