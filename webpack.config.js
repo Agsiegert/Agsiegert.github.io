@@ -88,14 +88,14 @@ module.exports = (env = {}) => {
               loader: 'babel-loader',
               options: {
                 presets: [
-                  'react',
-                  ['env', {
+                  '@babel/preset-react',
+                  ['@babel/preset-env', {
                     modules: false,
                     targets: { browsers: ['last 2 versions', 'ie >= 10'] },
                     debug: false
                   }],
                 ],
-                plugins: ['transform-object-rest-spread'],
+                plugins: ['@babel/plugin-proposal-object-rest-spread'],
                 cacheDirectory: 'tmp/babel-cache',
               },
             },
