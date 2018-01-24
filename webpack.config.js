@@ -92,11 +92,11 @@ module.exports = (env = {}) => {
                   ['@babel/preset-env', {
                     debug: false,
                     modules: false,
+                    shippedProposals: true,
                     targets: { browsers: ['last 2 versions', 'ie >= 10'] },
                     useBuiltIns: 'usage',
                   }],
                 ],
-                plugins: ['@babel/plugin-proposal-object-rest-spread'],
                 cacheDirectory: 'tmp/babel-cache',
               },
             },
