@@ -94,7 +94,7 @@ module.exports = (env = {}) => {
                     modules: false,
                     shippedProposals: true,
                     targets: { browsers: ['last 2 versions', 'ie >= 10'] },
-                    useBuiltIns: 'usage',
+                    useBuiltIns: 'entry',
                     include: ['es6.map', 'es6.set'],
                   }],
                 ],
