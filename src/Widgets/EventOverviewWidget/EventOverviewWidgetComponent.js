@@ -1,7 +1,7 @@
 import Event from 'Objs/Event/EventObjClass';
 import InPlaceEditingPlaceholder from 'Components/InPlaceEditingPlaceholder';
 import TagList from 'Components/TagList';
-import twoDigitNumber from 'utils/twoDigitNumber';
+import formatDate from 'utils/formatDate';
 
 class EventOverviewWidgetComponent extends React.Component {
   constructor(props) {
@@ -82,29 +82,31 @@ const EventItem = Scrivito.connect(({ event }) =>
         }
       >
         <span className="box-date">
-          { formatDate(event.get('date')) }
+          { formatDate(event.get('date'), 'mm/dd') }
         </span>
         <span className="box-topic dark-background">
           <h3 className="h3">{ event.get('title') }</h3>
-          <span>
-            <i
-              className={ `fa ${event.get('location') ? 'fa-map-marker' : ''} fa-2x` }
-              aria-hidden="true"
-              title="location"
-            />
-            <span>{ event.get('location') }</span>
-          </span>
+          <EventShortLocation event={ event } />
         </span>
       </Scrivito.BackgroundImageTag>
     </Scrivito.LinkTag>
   </div>
 );
 
-function formatDate(date) {
-  if (!date) { return null; }
+const EventShortLocation = Scrivito.connect(({ event }) => {
+  const location = [
+    event.get('locationName'),
+    event.get('locationLocality'),
+  ].filter(n => n).join(', ');
 
-  const month = date.getMonth() + 1; // getMonth return 0 to 11.
-  const dayOfMonth = date.getDate(); // getDate returns 1 to 31.
-
-  return `${twoDigitNumber(month)}/${twoDigitNumber(dayOfMonth)}`;
-}
+  return (
+    <span>
+      <i
+        className={ `fa ${location ? 'fa-map-marker' : ''} fa-2x` }
+        aria-hidden="true"
+        title="location"
+      />
+      <span>{ location }</span>
+    </span>
+  );
+});

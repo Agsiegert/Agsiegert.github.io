@@ -1,23 +1,8 @@
+import formatDate from 'utils/formatDate';
 import InPlaceEditingPlaceholder from 'Components/InPlaceEditingPlaceholder';
 import textExtractFromObj from 'utils/textExtractFromObj';
 import truncate from 'lodash/truncate';
-import twoDigitNumber from 'utils/twoDigitNumber';
 import BlogPostDate from './BlogPostDate';
-
-const MONTH_MAPPING = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
 
 const BlogPostPreviewList = Scrivito.connect(({ maxItems, author, tag }) => {
   let blogPosts = Scrivito.getClass('BlogPost').all().order('publishedAt', 'desc');
@@ -47,8 +32,8 @@ const BlogPostPreviewList = Scrivito.connect(({ maxItems, author, tag }) => {
   const listElements = [];
   posts.forEach(post => {
     const publishedAt = post.get('publishedAt');
-    if (publishedAt && dateHeadline !== humanReadableMonth(publishedAt)) {
-      dateHeadline = humanReadableMonth(publishedAt);
+    if (publishedAt && dateHeadline !== formatDate(publishedAt, 'mmmm yyyy')) {
+      dateHeadline = formatDate(publishedAt, 'mmmm yyyy');
       listElements.push(<MonthHeadline date={ publishedAt } key={ publishedAt }/>);
     }
 
@@ -64,8 +49,8 @@ const BlogPostPreviewList = Scrivito.connect(({ maxItems, author, tag }) => {
 
 const MonthHeadline = Scrivito.connect(({ date }) =>
   <li className="timeline-divider">
-    <time dateTime={ yearMonthCombination(date) }>
-      { humanReadableMonth(date) }
+    <time dateTime={ formatDate(date, 'yyyy-mm') }>
+      { formatDate(date, 'mmmm yyyy') }
     </time>
   </li>
 );
@@ -109,13 +94,5 @@ const BlogPostTitleImage = Scrivito.connect(({ post }) => {
     </Scrivito.LinkTag>
   );
 });
-
-function humanReadableMonth(date) {
-  return `${MONTH_MAPPING[date.getMonth()]} ${date.getFullYear()}`;
-}
-
-function yearMonthCombination(date) {
-  return `${date.getFullYear()}-${twoDigitNumber(date.getMonth())}`;
-}
 
 export default BlogPostPreviewList;

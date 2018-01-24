@@ -19,8 +19,29 @@ Scrivito.provideEditingConfig('Event', {
     image: {
       title: 'Image',
     },
-    location: {
-      title: 'Location',
+    locationName: {
+      title: 'Location name',
+      description: 'E.g. New York Convention Center',
+    },
+    locationStreetAddress: {
+      title: 'Street address',
+      description: 'E.g. 655 W. 34th Street',
+    },
+    locationLocality: {
+      title: 'Locality',
+      description: 'E.g. New York',
+    },
+    locationRegion: {
+      title: 'Region',
+      description: 'E.g. NY or CA',
+    },
+    locationPostalCode: {
+      title: 'Postal code',
+      description: 'E.g. 10001',
+    },
+    locationCountry: {
+      title: 'Country',
+      description: 'E.g. USA',
     },
     title: {
       title: 'Title',
@@ -34,7 +55,12 @@ Scrivito.provideEditingConfig('Event', {
   properties: [
     'title',
     'date',
-    'location',
+    'locationName',
+    'locationStreetAddress',
+    'locationLocality',
+    'locationRegion',
+    'locationPostalCode',
+    'locationCountry',
     'image',
     'tags',
   ],
