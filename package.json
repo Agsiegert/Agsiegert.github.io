@@ -52,7 +52,7 @@
     "sass-loader": "^6.0.6",
     "scrivito": "^0.3.0",
     "slick-carousel": "^1.6.0",
-    "striptags": "^3.1.1",
+    "striptags": "^2.2.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1",
