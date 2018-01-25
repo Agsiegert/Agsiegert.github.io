@@ -58,8 +58,9 @@ module.exports = (env = {}) => {
     );
     plugins.push(
       new ZipPlugin({
-        path: '../',
         filename: 'build.zip',
+        path: '../',
+        pathPrefix: 'build/',
       })
     );
   } else {
