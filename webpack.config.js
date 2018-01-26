@@ -80,23 +80,21 @@ module.exports = (env = {}) => {
       rules: [
         {
           test: /\.js$/,
-          include: [
-            path.join(__dirname, 'src'),
-            path.join(__dirname, 'node_modules/striptags'),
-          ],
+          include: [path.join(__dirname, 'src')],
           use: [
             {
               loader: 'babel-loader',
               options: {
                 presets: [
-                  'react',
-                  ['env', {
+                  '@babel/preset-react',
+                  ['@babel/preset-env', {
+                    debug: false,
                     modules: false,
-                    targets: { browsers: ['last 2 versions', 'ie >= 10'] },
-                    debug: false
+                    shippedProposals: true,
+                    targets: { browsers: ['last 2 versions'] },
+                    useBuiltIns: 'usage',
                   }],
                 ],
-                plugins: ['transform-object-rest-spread'],
                 cacheDirectory: 'tmp/babel-cache',
               },
             },
